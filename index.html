@@ -80,7 +80,13 @@
         ]
     }
     </script>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261122c">
+    <style>
+      /* Critical: keep example tabs working if site.css is cached */
+      .example-panel { display: none !important; }
+      .example-panel.is-active { display: block !important; }
+      .example-tab { cursor: pointer; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -313,7 +319,7 @@
                     <!-- Tab Content -->
                     <div>
                         <!-- Configuration Tab -->
-                        <div class="example-panel is-active" id="example-config" role="tabpanel">
+                        <div class="example-panel is-active" id="example-config" role="tabpanel" style="display:block">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Application Configuration</h3>
@@ -347,7 +353,7 @@ logging:
                         </div>
 
                         <!-- Docker Tab -->
-                        <div class="example-panel" id="example-docker" role="tabpanel">
+                        <div class="example-panel" id="example-docker" role="tabpanel" hidden style="display:none">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Docker Compose Configuration</h3>
@@ -392,7 +398,7 @@ volumes:
                         </div>
 
                         <!-- CI/CD Tab -->
-                        <div class="example-panel" id="example-cicd" role="tabpanel">
+                        <div class="example-panel" id="example-cicd" role="tabpanel" hidden style="display:none">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">GitHub Actions Workflow</h3>
@@ -447,7 +453,7 @@ jobs:
                         </div>
 
                         <!-- Kubernetes Tab -->
-                        <div class="example-panel" id="example-k8s" role="tabpanel">
+                        <div class="example-panel" id="example-k8s" role="tabpanel" hidden style="display:none">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Kubernetes Deployment</h3>
@@ -526,7 +532,7 @@ spec:
                         </div>
 
                         <!-- OpenAPI Tab -->
-                        <div class="example-panel" id="example-api" role="tabpanel">
+                        <div class="example-panel" id="example-api" role="tabpanel" hidden style="display:none">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">OpenAPI 3.0 Specification</h3>
@@ -630,7 +636,7 @@ components:
                         </div>
 
                         <!-- Data Structure Tab -->
-                        <div class="example-panel" id="example-data" role="tabpanel">
+                        <div class="example-panel" id="example-data" role="tabpanel" hidden style="display:none">
                             <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
                                 <div class="mb-4">
                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Complex Data Structure</h3>
@@ -981,7 +987,7 @@ phone: "123-456-7890"</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/mode-yaml.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/theme-monokai.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="tool-shared.js"></script>
-    <script src="script.js"></script>
+    <script src="/script.js?v=20261122c"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (window.ToolShared) ToolShared.mountToolNav('yaml-tools');

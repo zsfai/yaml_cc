@@ -1094,8 +1094,15 @@ address:
     }
 
     setupExampleTabs() {
-        const tabButtons = document.querySelectorAll('.example-tab');
-        const tabPanels = document.querySelectorAll('.example-panel');
+        const root = document.getElementById('yaml-examples');
+        if (!root || root.dataset.tabsReady === '1') {
+            // Still ensure copy buttons exist if tabs already bound
+            this.addExampleCopyButtons();
+            return;
+        }
+
+        const tabButtons = root.querySelectorAll('.example-tab');
+        const tabPanels = root.querySelectorAll('.example-panel');
         if (tabButtons.length === 0) return;
 
         const activate = (button) => {
@@ -1113,16 +1120,24 @@ address:
                 btn.setAttribute('aria-selected', on ? 'true' : 'false');
             });
 
+            // Set display inline so tabs work even if CSS is stale/cached
             tabPanels.forEach((panel) => {
-                panel.classList.toggle('is-active', panel === targetPanel);
+                const on = panel === targetPanel;
+                panel.classList.toggle('is-active', on);
+                panel.hidden = !on;
+                panel.style.display = on ? 'block' : 'none';
             });
         };
 
         tabButtons.forEach((button) => {
-            button.addEventListener('click', () => activate(button));
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                activate(button);
+            });
         });
 
-        const initial = document.querySelector('.example-tab.is-active') || tabButtons[0];
+        root.dataset.tabsReady = '1';
+        const initial = root.querySelector('.example-tab.is-active') || tabButtons[0];
         if (initial) activate(initial);
 
         this.addExampleCopyButtons();

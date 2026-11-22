@@ -1,10 +1,14 @@
 /* Homepage YAML Examples tabs — isolated from tutorial .tab-panel rules */
 .example-panel {
-    display: none;
+    display: none !important;
 }
 
 .example-panel.is-active {
-    display: block;
+    display: block !important;
+}
+
+.example-tab {
+    cursor: pointer;
 }
 
 .example-tab.is-active {
