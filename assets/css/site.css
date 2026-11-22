@@ -1955,9 +1955,6 @@ body {
 
 .tab-panel {
     display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(10px);
 }
 
 .tab-panel.active {

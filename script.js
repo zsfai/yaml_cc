@@ -129,15 +129,14 @@ class YAMLTools {
             this.showResult(resultDiv, 'Paste a JSON Schema into the schema panel (click "JSON Schema").', 'info');
             return;
         }
-        if (typeof Ajv === 'undefined' && typeof window.ajv7 === 'undefined') {
+        if (typeof Ajv === 'undefined') {
             this.showResult(resultDiv, 'JSON Schema library (Ajv) failed to load. Check your network/CDN.', 'error');
             return;
         }
         try {
             const { docs, multi } = this.loadYamlDocuments(input);
             let schema = JSON.parse(schemaText);
-            const AjvCtor = window.ajv7 || Ajv;
-            const ajv = new AjvCtor({ allErrors: true, strict: false });
+            const ajv = new Ajv({ allErrors: true });
             const validate = ajv.compile(schema);
             const failures = [];
             docs.forEach((doc, i) => {
@@ -1159,15 +1158,17 @@ address:
                 // Hide all panels
                 tabPanels.forEach(panel => {
                     panel.classList.add('hidden');
+                    panel.classList.remove('active');
                     panel.style.display = 'none';
                 });
                 
                 // Add active styling to clicked button
                 button.classList.remove('border-transparent', 'text-gray-700');
-                button.classList.add('border-blue-600', 'text-gray-900');
+                button.classList.add('border-blue-600', 'text-gray-900', 'active');
                 
                 // Show target panel
                 targetPanel.classList.remove('hidden');
+                targetPanel.classList.add('active');
                 targetPanel.style.display = 'block';
             });
         });
@@ -1177,9 +1178,15 @@ address:
             const firstButton = tabButtons[0];
             const firstPanel = document.getElementById(firstButton.getAttribute('data-tab'));
             if (firstPanel) {
+                tabPanels.forEach(panel => {
+                    panel.classList.add('hidden');
+                    panel.classList.remove('active');
+                    panel.style.display = 'none';
+                });
                 firstButton.classList.remove('border-transparent', 'text-gray-700');
-                firstButton.classList.add('border-blue-600', 'text-gray-900');
+                firstButton.classList.add('border-blue-600', 'text-gray-900', 'active');
                 firstPanel.classList.remove('hidden');
+                firstPanel.classList.add('active');
                 firstPanel.style.display = 'block';
             }
         }
