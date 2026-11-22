@@ -51,10 +51,124 @@ class YAMLTools {
 
     bindEvents() {
         // Unified tool events
-        document.getElementById('validate-btn').addEventListener('click', () => this.validateYAML());
-        document.getElementById('format-btn').addEventListener('click', () => this.formatYAML());
-        document.getElementById('convert-btn').addEventListener('click', () => this.convertYAML());
-        document.getElementById('clear-btn').addEventListener('click', () => this.clearAll());
+        const validateBtn = document.getElementById('validate-btn');
+        const formatBtn = document.getElementById('format-btn');
+        const convertBtn = document.getElementById('convert-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const schemaBtn = document.getElementById('schema-btn');
+        const toggleSchema = document.getElementById('toggle-schema');
+        if (validateBtn) validateBtn.addEventListener('click', () => this.validateYAML());
+        if (formatBtn) formatBtn.addEventListener('click', () => this.formatYAML());
+        if (convertBtn) convertBtn.addEventListener('click', () => this.convertYAML());
+        if (clearBtn) clearBtn.addEventListener('click', () => this.clearAll());
+        if (schemaBtn) schemaBtn.addEventListener('click', () => this.validateAgainstSchema());
+        if (toggleSchema) {
+            toggleSchema.addEventListener('click', () => {
+                const panel = document.getElementById('schema-panel');
+                if (panel) panel.classList.toggle('hidden');
+            });
+        }
+    }
+
+    isMultiDocEnabled() {
+        const el = document.getElementById('multi-doc');
+        return !!(el && el.checked);
+    }
+
+    getYamlVersion() {
+        const el = document.getElementById('yaml-version');
+        return el ? el.value : '1.2';
+    }
+
+    getJsYamlOptions() {
+        // YAML 1.2: prefer JSON schema (no yes/no booleans). YAML 1.1-aware: DEFAULT schema.
+        if (typeof jsyaml === 'undefined') return {};
+        if (this.getYamlVersion() === '1.2' && jsyaml.JSON_SCHEMA) {
+            return { schema: jsyaml.JSON_SCHEMA };
+        }
+        return {};
+    }
+
+    loadYamlDocuments(yamlContent) {
+        const opts = this.getJsYamlOptions();
+        if (this.isMultiDocEnabled() && typeof jsyaml.loadAll === 'function') {
+            const docs = [];
+            jsyaml.loadAll(yamlContent, (doc) => docs.push(doc), opts);
+            return { docs, multi: true };
+        }
+        return { docs: [jsyaml.load(yamlContent, opts)], multi: false };
+    }
+
+    collectLegacyTruthyWarnings(yamlContent, warnings) {
+        if (this.getYamlVersion() !== '1.1') return;
+        const lines = yamlContent.split('\n');
+        const legacy = /:\s*(yes|no|on|off|Yes|No|YES|NO|On|Off|ON|OFF)\s*(#.*)?$/;
+        lines.forEach((line, index) => {
+            if (legacy.test(line) && !/:\s*["'].*["']/.test(line)) {
+                warnings.push({
+                    type: 'yaml11_truthy',
+                    message: 'Value may be interpreted as a boolean under YAML 1.1 (yes/no/on/off). Quote it if you mean a string.',
+                    line: index + 1,
+                    column: 1,
+                    severity: 'warning',
+                    suggestion: 'Use true/false for booleans, or quote the value as a string. See /guides/yaml-1.1-vs-1.2.html'
+                });
+            }
+        });
+    }
+
+    validateAgainstSchema() {
+        const resultDiv = document.getElementById('result-output');
+        const input = this.getYAMLInput().trim();
+        const schemaText = (document.getElementById('schema-input')?.value || '').trim();
+        if (!input) {
+            this.showResult(resultDiv, 'Please enter YAML content first.', 'info');
+            return;
+        }
+        if (!schemaText) {
+            this.showResult(resultDiv, 'Paste a JSON Schema into the schema panel (click "JSON Schema").', 'info');
+            return;
+        }
+        if (typeof Ajv === 'undefined' && typeof window.ajv7 === 'undefined') {
+            this.showResult(resultDiv, 'JSON Schema library (Ajv) failed to load. Check your network/CDN.', 'error');
+            return;
+        }
+        try {
+            const { docs, multi } = this.loadYamlDocuments(input);
+            let schema = JSON.parse(schemaText);
+            const AjvCtor = window.ajv7 || Ajv;
+            const ajv = new AjvCtor({ allErrors: true, strict: false });
+            const validate = ajv.compile(schema);
+            const failures = [];
+            docs.forEach((doc, i) => {
+                const ok = validate(doc);
+                if (!ok) {
+                    failures.push({
+                        doc: multi ? i + 1 : null,
+                        errors: (validate.errors || []).map((e) => `${e.instancePath || '/'} ${e.message}`)
+                    });
+                }
+            });
+            if (failures.length === 0) {
+                this.showResult(
+                    resultDiv,
+                    `Schema validation passed${multi ? ` for ${docs.length} document(s)` : ''}.`,
+                    'success'
+                );
+            } else {
+                const html = failures
+                    .map((f) => {
+                        const title = f.doc ? `Document ${f.doc}` : 'Document';
+                        return `<div class="mb-3"><strong>${title}</strong><ul class="list-disc ml-5">${f.errors
+                            .map((e) => `<li>${e}</li>`)
+                            .join('')}</ul></div>`;
+                    })
+                    .join('');
+                resultDiv.innerHTML = `<div class="result-error p-2"><h3 class="text-red-700 font-semibold mb-2">Schema validation failed</h3>${html}</div>`;
+            }
+        } catch (e) {
+            this.showResult(resultDiv, `Schema validation error: ${e.message}`, 'error');
+        }
     }
 
     setupExampleData() {
@@ -404,9 +518,24 @@ address:
             prevIndent = leadingSpaces;
         });
 
-        // 2. Try to parse with js-yaml to catch additional syntax errors
+        // 2. Try to parse with js-yaml (single or multi-document)
+        let docs = [];
+        let multi = false;
         try {
-            parsed = jsyaml.load(yamlContent);
+            const loaded = this.loadYamlDocuments(yamlContent);
+            docs = loaded.docs;
+            multi = loaded.multi;
+            parsed = docs.length === 1 ? docs[0] : docs;
+            if (multi) {
+                warnings.push({
+                    type: 'multi_document',
+                    message: `Parsed ${docs.length} YAML document(s) (--- separators).`,
+                    line: null,
+                    column: null,
+                    severity: 'warning',
+                    suggestion: 'Each document is validated independently when Multi-doc is enabled.'
+                });
+            }
         } catch (error) {
             hasSyntaxError = true;
             const errorLine = error.mark ? error.mark.line + 1 : null;
@@ -435,8 +564,13 @@ address:
         }
 
         // 3. Validate against YAML best practices (only if no critical errors)
-        if (parsed && !hasSyntaxError) {
-            this.validateBestPractices(yamlContent, parsed, warnings);
+        if (!hasSyntaxError) {
+            this.collectLegacyTruthyWarnings(yamlContent, warnings);
+            if (Array.isArray(docs) && docs.length) {
+                docs.forEach((doc) => this.validateBestPractices(yamlContent, doc, warnings));
+            } else if (parsed) {
+                this.validateBestPractices(yamlContent, parsed, warnings);
+            }
         }
 
         return {
@@ -444,12 +578,14 @@ address:
             errors: errors,
             warnings: warnings,
             parsed: parsed,
+            documentCount: multi ? docs.length : 1,
             statistics: {
                 totalLines: lines.length,
                 nonEmptyLines: lines.filter(line => line.trim() && !line.trim().startsWith('#')).length,
                 commentLines: lines.filter(line => line.trim().startsWith('#')).length,
                 errorCount: errors.length,
-                warningCount: warnings.length
+                warningCount: warnings.length,
+                documentCount: multi ? docs.length : 1
             }
         };
     }
@@ -577,21 +713,24 @@ address:
         }
 
         try {
-            // Parse YAML first
-            const parsed = jsyaml.load(input);
-            
-            // Format with enhanced options
-            const formatted = jsyaml.dump(parsed, {
-                indent: 2,                    // Use 2-space indentation
-                lineWidth: 80,                // Wrap lines at 80 characters
-                noRefs: true,                 // Don't use YAML references
-                sortKeys: false,              // Preserve key order
-                quotingType: '"',             // Use double quotes
-                forceQuotes: false,           // Only quote when necessary
-                noCompatMode: false,          // YAML 1.2 compatibility
-                condenseFlow: false,          // Don't condense flow collections
-                skipInvalid: false            // Don't skip invalid types
-            });
+            // Parse YAML first (respect multi-doc + version schema)
+            const { docs, multi } = this.loadYamlDocuments(input);
+            const dumpOpts = {
+                indent: 2,
+                lineWidth: 80,
+                noRefs: true,
+                sortKeys: false,
+                quotingType: '"',
+                forceQuotes: false,
+                noCompatMode: false,
+                condenseFlow: false,
+                skipInvalid: false,
+                ...this.getJsYamlOptions()
+            };
+            const formatted = multi
+                ? docs.map((doc) => jsyaml.dump(doc, dumpOpts).trimEnd()).join('\n---\n') + '\n'
+                : jsyaml.dump(docs[0], dumpOpts);
+            const parsed = multi ? docs : docs[0];
             
             // Show formatted result with statistics
             const stats = this.getYAMLStats(parsed);
@@ -795,8 +934,9 @@ address:
         }
 
         try {
-            // Parse YAML and convert to JSON
-            const parsed = jsyaml.load(input);
+            // Parse YAML and convert to JSON (array when multi-doc)
+            const { docs, multi } = this.loadYamlDocuments(input);
+            const parsed = multi ? docs : docs[0];
             const jsonString = JSON.stringify(parsed, null, 2);
             
             // Get statistics

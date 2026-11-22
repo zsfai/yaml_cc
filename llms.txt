@@ -1,0 +1,53 @@
+# YAML.cc
+
+> Privacy-first YAML tools and practical guides for developers.
+> All validation and conversion run in the browser; files are never uploaded.
+
+## Primary
+
+- [YAML Validator & Formatter](https://yaml.cc/): Validate, format, and convert YAML offline in your browser (multi-doc, YAML 1.2/1.1-aware, optional JSON Schema)
+- [JSON to YAML](https://yaml.cc/json-to-yaml.html)
+- [Tutorial](https://yaml.cc/tutorial/): YAML syntax tutorials
+- [Q&A](https://yaml.cc/qa/): Common YAML errors and how-to answers
+- [About](https://yaml.cc/about.html)
+- [Privacy](https://yaml.cc/privacy.html)
+
+## Guides (English)
+
+- [YAML Practical Guide](https://yaml.cc/guides/yaml-practical-guide.html)
+- [YAML 1.1 vs 1.2](https://yaml.cc/guides/yaml-1.1-vs-1.2.html)
+- [YAML Cheat Sheet](https://yaml.cc/guides/yaml-cheat-sheet.html)
+- [YAML Error Encyclopedia](https://yaml.cc/guides/yaml-errors.html)
+- [YAML Tools Landscape](https://yaml.cc/guides/yaml-tools.html)
+
+## Language hubs
+
+- [Python](https://yaml.cc/guides/languages/python.html)
+- [JavaScript / TypeScript](https://yaml.cc/guides/languages/javascript-typescript.html)
+- [Go](https://yaml.cc/guides/languages/go.html)
+- [Java](https://yaml.cc/guides/languages/java.html)
+- [Rust](https://yaml.cc/guides/languages/rust.html)
+- [C#](https://yaml.cc/guides/languages/csharp.html)
+
+## Ecosystem hubs
+
+- [Kubernetes](https://yaml.cc/guides/ecosystems/kubernetes.html)
+- [Docker Compose](https://yaml.cc/guides/ecosystems/docker-compose.html)
+- [GitHub Actions](https://yaml.cc/guides/ecosystems/github-actions.html)
+- [Ansible](https://yaml.cc/guides/ecosystems/ansible.html)
+- [OpenAPI](https://yaml.cc/guides/ecosystems/openapi.html)
+
+## Chinese (zh-Hans)
+
+- [中文首页](https://yaml.cc/zh/)
+- [关于](https://yaml.cc/zh/about.html)
+- [隐私](https://yaml.cc/zh/privacy.html)
+- [YAML 实践指南](https://yaml.cc/zh/guides/yaml-practical-guide.html)
+- [YAML 1.1 与 1.2](https://yaml.cc/zh/guides/yaml-1.1-vs-1.2.html)
+- [YAML 速查表](https://yaml.cc/zh/guides/yaml-cheat-sheet.html)
+- [YAML 错误百科](https://yaml.cc/zh/guides/yaml-errors.html)
+- [YAML 工具全景](https://yaml.cc/zh/guides/yaml-tools.html)
+
+## Optional
+
+- Official YAML specification: https://yaml.org/spec/1.2.2/

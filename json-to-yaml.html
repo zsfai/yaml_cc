@@ -16,10 +16,8 @@
     <meta property="og:url" content="https://yaml.cc/json-to-yaml.html">
     <meta property="og:title" content="JSON to YAML Converter - YAML.cc">
     <meta property="og:description" content="Convert JSON to YAML online. All processing runs locally in your browser.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="index.css" type="text/css">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -30,12 +28,17 @@
                         YAML.cc
                     </a>
                 </div>
-                <ul class="hidden md:flex space-x-8">
+                <ul class="hidden md:flex space-x-6 text-sm">
                     <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">YAML Tools</a></li>
-                    <li><a href="json-to-yaml.html" class="text-gray-900 font-medium">JSON to YAML</a></li>
-                    <li><a href="/#info-section" class="text-gray-600 hover:text-gray-900 transition">What is YAML?</a></li>
-                    <li><a href="https://yaml.cc/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="/about.html" class="text-gray-600 hover:text-gray-900 transition">About</a></li>
+                    <li><a href="/zh/" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
         </nav>
     </header>
@@ -127,7 +130,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-6 pt-6 text-center text-sm text-gray-400">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -138,5 +141,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/theme-monokai.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="tool-shared.js"></script>
     <script src="json-to-yaml.js"></script>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

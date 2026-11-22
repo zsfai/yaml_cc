@@ -1,0 +1,17 @@
+{
+  "name": "yaml_cc",
+  "version": "1.0.0",
+  "description": "YAML.cc — privacy-first YAML tools and guides",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.built.css --minify && node scripts/concat-css.js",
+    "build": "npm run build:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsfai/yaml_cc.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

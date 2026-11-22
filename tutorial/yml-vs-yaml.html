@@ -15,10 +15,8 @@
     <meta property="og:url" content="https://yaml.cc/tutorial/yml-vs-yaml.html">
     <meta property="og:title" content="YML vs YAML: File Extension Difference Explained">
     <meta property="og:description" content="Complete guide to understanding .yml vs .yaml file extensions.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../index.css" type="text/css">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -35,6 +33,17 @@
                     <li><a href="../tutorial/" class="text-gray-900 font-medium">Tutorial</a></li>
                     <li><a href="../qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="../#tools" class="block py-1 text-gray-700">YAML Tools</a>
+                <a href="../guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="index.html" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="../qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="../zh/" class="block py-1 text-gray-700">中文</a>
             </div>
         </nav>
     </header>
@@ -432,9 +441,20 @@ const doc2 = yaml.load(fs.readFileSync('config.yaml', 'utf8'));</code></pre>
                 </div>
             </div>
             <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

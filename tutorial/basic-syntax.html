@@ -9,21 +9,21 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yaml.cc/tutorial/basic-syntax.html">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://yaml.cc/tutorial/basic-syntax.html">
     <meta property="og:title" content="YAML Basic Syntax - Learn YAML Fundamentals">
     <meta property="og:description" content="Learn YAML basic syntax including indentation rules, comments, structure, and fundamental concepts. Perfect for YAML beginners.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yaml.cc/tutorial/basic-syntax.html">
     <meta property="twitter:title" content="YAML Basic Syntax - Learn YAML Fundamentals">
     <meta property="twitter:description" content="Learn YAML basic syntax including indentation rules, comments, structure, and fundamental concepts. Perfect for YAML beginners.">
-    <meta property="twitter:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -65,6 +65,16 @@
                     <li><a href="../index.html#yaml-syntax">Syntax Guide</a></li>
                     <li><a href="../index.html#best-practices">Best Practices</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="../#tools" class="block py-1 text-gray-700">YAML Tools</a>
+                <a href="../guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="index.html" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="../qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="../zh/" class="block py-1 text-gray-700">中文</a>
             </div>
         </nav>
     </header>
@@ -134,7 +144,7 @@ colors: [red, green, blue]</code></pre>
                     <p>Indentation is crucial in YAML. It defines the structure and hierarchy of your data.</p>
                     
                     <div class="important-box">
-                        <h3>⚠️ Important Indentation Rules:</h3>
+                        <h3>Note: Important Indentation Rules:</h3>
                         <ul>
                             <li>Use <strong>spaces</strong> for indentation (not tabs)</li>
                             <li>Be <strong>consistent</strong> with your indentation level</li>
@@ -145,7 +155,7 @@ colors: [red, green, blue]</code></pre>
 
                     <div class="code-example">
                         <h3>Correct Indentation</h3>
-                        <pre><code># ✅ Good - 2 spaces per level
+                        <pre><code>#  Good - 2 spaces per level
 database:
   host: localhost
   port: 5432
@@ -156,7 +166,7 @@ database:
 
                     <div class="code-example">
                         <h3>Incorrect Indentation</h3>
-                        <pre><code># ❌ Bad - inconsistent indentation
+                        <pre><code>#  Bad - inconsistent indentation
 database:
     host: localhost
   port: 5432
@@ -272,7 +282,7 @@ missing:
                 <section class="tutorial-section">
                     <h2>Common Mistakes to Avoid</h2>
                     <div class="warning-box">
-                        <h3>⚠️ Common YAML Mistakes:</h3>
+                        <h3>Note: Common YAML Mistakes:</h3>
                         <ul>
                             <li><strong>Inconsistent indentation:</strong> Mixing tabs and spaces</li>
                             <li><strong>Missing colons:</strong> Forgetting <code>:</code> after keys</li>
@@ -283,18 +293,18 @@ missing:
 
                     <div class="code-example">
                         <h3>Common Mistakes</h3>
-                        <pre><code># ❌ Wrong - missing colon
+                        <pre><code>#  Wrong - missing colon
 name John Doe
 
-# ❌ Wrong - inconsistent indentation
+#  Wrong - inconsistent indentation
 person:
   name: John
     age: 30
 
-# ❌ Wrong - using brackets for lists
+#  Wrong - using brackets for lists
 fruits: [apple, banana]
 
-# ✅ Correct
+#  Correct
 name: John Doe
 person:
   name: John
@@ -364,7 +374,7 @@ server:
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>YAML.cc</h3>
-                    <p>Professional YAML validation, formatting, and conversion tools for developers. The most trusted YAML tools platform.</p>
+                    <p>YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Tools</h4>
@@ -385,9 +395,20 @@ server:
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

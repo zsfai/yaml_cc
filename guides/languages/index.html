@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML Language Guides | YAML.cc</title>
+  <meta name="description" content="YAML libraries and patterns by language: Python, JavaScript/TypeScript, Go, Java, Rust, and C#.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yaml.cc/guides/languages/">
+  <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/languages/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/languages/">
+  <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/languages/">
+  <meta property="og:title" content="YAML Language Guides | YAML.cc">
+  <meta property="og:description" content="YAML libraries and patterns by language: Python, JavaScript/TypeScript, Go, Java, Rust, and C#.">
+  <meta property="og:url" content="https://yaml.cc/guides/languages/">
+  <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="bg-white text-gray-900">
+<header class="border-b border-gray-200 sticky top-0 bg-white z-50">
+  <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+    <a href="/" class="font-semibold">YAML.cc</a>
+    <ul class="hidden md:flex gap-6 text-sm">
+      <li><a href="/#tools" class="text-gray-600 hover:text-gray-900">Tools</a></li>
+      <li><a href="/guides/" class="text-gray-600 hover:text-gray-900">Guides</a></li>
+      <li><a href="https://yaml.cc/zh/guides/languages/" class="text-gray-600 hover:text-gray-900">中文</a></li>
+    </ul>
+    <button type="button" class="md:hidden p-2" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-nav" class="hidden md:hidden px-4 pb-3 space-y-2 text-sm border-t">
+    <a href="/#tools" class="block">Tools</a>
+    <a href="/guides/" class="block">Guides</a>
+    <a href="https://yaml.cc/zh/guides/languages/" class="block">中文</a>
+  </div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-10">
+  <h1 class="text-3xl font-bold mb-4">YAML by Language</h1>
+  <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 mb-8 text-gray-700"><p>Use a maintained YAML library for your language, prefer safe or typed loading for untrusted input, and validate files before deploy.</p></div>
+  <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600 hover:text-blue-700" href="python.html">Python (PyYAML / ruamel.yaml)</a></li>
+<li><a class="text-blue-600 hover:text-blue-700" href="javascript-typescript.html">JavaScript / TypeScript (js-yaml)</a></li>
+<li><a class="text-blue-600 hover:text-blue-700" href="go.html">Go (yaml.v3)</a></li>
+<li><a class="text-blue-600 hover:text-blue-700" href="java.html">Java (SnakeYAML)</a></li>
+<li><a class="text-blue-600 hover:text-blue-700" href="rust.html">Rust (serde_yaml)</a></li>
+<li><a class="text-blue-600 hover:text-blue-700" href="csharp.html">C# (YamlDotNet)</a></li>
+  </ul>
+  <p class="mt-8 text-sm text-gray-600"><a class="text-blue-600" href="/guides/">Back to guides</a></p>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold mb-3">How to choose a library</h2>
+    <p class="text-gray-700 mb-3">Prefer the ecosystem-standard library that your framework already documents. Avoid abandoned wrappers. For untrusted input, use safe or typed APIs and reject documents that do not match your expected shape.</p>
+    <p class="text-gray-700">After loading, still validate domain rules (required keys, enums) in application code or with JSON Schema where available.</p>
+  </section>
+
+</main>
+<footer class="border-t text-center text-sm text-gray-500 py-8">&copy; 2026 YAML.cc</footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+
+</body>
+</html>

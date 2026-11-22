@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML Tools & Validation Landscape | YAML.cc</title>
+    <meta name="description" content="Overview of YAML validators, linters, and converters: YAML.cc browser tools, yamllint, yq, and when to use each.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/yaml-tools.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/guides/yaml-tools.html">
+    <meta property="og:title" content="YAML Tools & Validation Landscape | YAML.cc">
+    <meta property="og:description" content="Overview of YAML validators, linters, and converters: YAML.cc browser tools, yamllint, yq, and when to use each.">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="YAML Tools & Validation Landscape | YAML.cc">
+    <meta property="twitter:description" content="Overview of YAML validators, linters, and converters: YAML.cc browser tools, yamllint, yq, and when to use each.">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "YAML Tools Landscape",
+        "description": "Overview of YAML validators, linters, and converters: YAML.cc browser tools, yamllint, yq, and when to use each.",
+        "inLanguage": "en",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/guides/yaml-tools.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://yaml.cc/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://yaml.cc/guides/"},{"@type":"ListItem","position":3,"name":"YAML Tools Landscape","item":"https://yaml.cc/guides/yaml-tools.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">Tools</a></li>
+                    <li><a href="/guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="https://yaml.cc/zh/guides/yaml-tools.html" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/" class="text-blue-600 hover:text-blue-700">Home</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">Guides</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">yaml tools</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">YAML Tools Landscape</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">Direct answer</p>
+                    <p>Use an in-browser validator for private paste checks, yamllint for repository style rules, and yq or language libraries for conversion and automation. YAML.cc tools never upload your file.</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">On YAML.cc</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/#tools">YAML validate, format, convert to JSON</a> — private, in-browser</li>
+<li><a class="text-blue-600" href="/json-to-yaml.html">JSON to YAML</a></li>
+<li><a class="text-blue-600" href="/toml-to-yaml.html">TOML to YAML</a> / <a class="text-blue-600" href="/yaml-to-toml.html">YAML to TOML</a></li>
+</ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">CLI essentials</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code># lint
+pip install yamllint && yamllint config.yaml
+
+# query / convert
+yq -o=json '.' config.yaml
+
+# python check
+python -c "import yaml; yaml.safe_load(open('config.yaml'))"</code></pre></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">When to use what</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li>Quick paste check → YAML.cc online tools</li><li>Repo style rules → yamllint in CI</li><li>Schema shape (K8s CRD, JSON Schema) → editor + schema validators</li></ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Related</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="/tutorial/tools-and-validation.html">Tools tutorial</a></li><li><a class="text-blue-600" href="/guides/yaml-practical-guide.html">Practical guide</a></li></ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Recommended workflow</h2>
+                <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                    <li>Edit in an IDE with YAML schema support when available (Kubernetes, Compose, GitHub Actions).</li>
+                    <li>Run a private paste check on <a class="text-blue-600" href="/#tools">YAML.cc</a> for syntax.</li>
+                    <li>Enforce style in CI with yamllint.</li>
+                    <li>Apply ecosystem dry-run (<code class="bg-gray-100 px-1 rounded">kubectl</code>, <code class="bg-gray-100 px-1 rounded">ansible-playbook --syntax-check</code>).</li>
+                </ol>
+            </section>
+
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">YAML.cc advanced options</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>Multi-doc</strong> — validate and convert streams separated by <code class="bg-gray-100 px-1 rounded">---</code>.</li>
+                    <li><strong>YAML 1.2 / 1.1-aware</strong> — choose parse schema and surface legacy truthy warnings.</li>
+                    <li><strong>JSON Schema</strong> — optional Ajv validation entirely in the browser.</li>
+                </ul>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/guides/" class="hover:text-gray-900">Guides</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">Tutorial</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">Q&A</a></li>
+                        <li><a href="/about.html" class="hover:text-gray-900">About</a></li>
+                        <li><a href="/privacy.html" class="hover:text-gray-900">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>

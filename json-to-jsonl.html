@@ -7,18 +7,24 @@
     <meta name="description" content="Convert JSON arrays or objects to JSONL (JSON Lines) online. Free, private, runs in your browser.">
     <link rel="canonical" href="https://yaml.cc/json-to-jsonl.html">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="index.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700">YAML.cc</a>
-                <ul class="hidden md:flex space-x-8">
-                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">YAML → JSON</a></li>
-                    <li><a href="json-to-jsonl.html" class="text-gray-900 font-medium">JSON → JSONL</a></li>
+                <ul class="hidden md:flex space-x-6 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">YAML Tools</a></li>
+                    <li><a href="/guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="/about.html" class="text-gray-600 hover:text-gray-900 transition">About</a></li>
+                    <li><a href="/zh/" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
         </nav>
     </header>
@@ -65,5 +71,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/theme-monokai.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="tool-shared.js"></script>
     <script src="json-to-jsonl.js"></script>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML Error Encyclopedia | YAML.cc</title>
+    <meta name="description" content="Index of common YAML parser errors and configuration issues with links to step-by-step fixes on YAML.cc Q&A.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/guides/yaml-errors.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/yaml-errors.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/yaml-errors.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/yaml-errors.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/guides/yaml-errors.html">
+    <meta property="og:title" content="YAML Error Encyclopedia | YAML.cc">
+    <meta property="og:description" content="Index of common YAML parser errors and configuration issues with links to step-by-step fixes on YAML.cc Q&A.">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="YAML Error Encyclopedia | YAML.cc">
+    <meta property="twitter:description" content="Index of common YAML parser errors and configuration issues with links to step-by-step fixes on YAML.cc Q&A.">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "YAML Error Encyclopedia",
+        "description": "Index of common YAML parser errors and configuration issues with links to step-by-step fixes on YAML.cc Q&A.",
+        "inLanguage": "en",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/guides/yaml-errors.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://yaml.cc/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://yaml.cc/guides/"},{"@type":"ListItem","position":3,"name":"YAML Error Encyclopedia","item":"https://yaml.cc/guides/yaml-errors.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">Tools</a></li>
+                    <li><a href="/guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="https://yaml.cc/zh/guides/yaml-errors.html" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/" class="text-blue-600 hover:text-blue-700">Home</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">Guides</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">yaml errors</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">YAML Error Encyclopedia</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">Direct answer</p>
+                    <p>Most YAML failures are indentation, missing colons, or type-coercion surprises. Match your error message in this index, fix the structure, then re-validate with a YAML 1.2-aware parser.</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">How to use this index</h2>
+                <p class="text-gray-700 mb-4">Find the error message or symptom below, open the Q&amp;A article, then validate the fixed file in the <a class="text-blue-600" href="/#tools">browser validator</a>.</p>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Parser errors</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/qa/yaml-scanner-scannererror-mapping-values-not-allowed.html">mapping values are not allowed here</a></li>
+<li><a class="text-blue-600" href="/qa/yaml-line-5-did-not-find-expected-key.html">did not find expected key</a></li>
+</ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Language / tooling</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/qa/modulenotfounderror-no-module-named-yaml.html">ModuleNotFoundError: No module named 'yaml'</a></li>
+<li><a class="text-blue-600" href="/qa/python-read-yaml-file-to-dict.html">Python read YAML to dict</a></li>
+<li><a class="text-blue-600" href="/qa/cant-import-glide-using-gopkg-in-yaml-v2.html">Go gopkg.in/yaml.v2 import issues</a></li>
+</ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Ecosystem configs</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/qa/how-to-create-deployment-yaml-file-in-kubernetes.html">Kubernetes Deployment YAML</a></li>
+<li><a class="text-blue-600" href="/qa/how-to-edit-configuration-yaml-home-assistant.html">Home Assistant configuration.yaml</a></li>
+<li><a class="text-blue-600" href="/qa/what-is-pre-commit-config-yaml.html">.pre-commit-config.yaml</a></li>
+<li><a class="text-blue-600" href="/qa/conda-create-environment-from-yml.html">Conda environment.yml</a></li>
+<li><a class="text-blue-600" href="/qa/how-to-get-openapi-yaml-from-json.html">OpenAPI YAML from JSON</a></li>
+</ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Basics</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/qa/how-to-create-a-yaml-file.html">How to create a YAML file</a></li>
+<li><a class="text-blue-600" href="/qa/how-to-open-a-yaml-file.html">How to open a YAML file</a></li>
+<li><a class="text-blue-600" href="/qa/">Full Q&amp;A list</a></li>
+</ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Fast triage checklist</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>Convert tabs to spaces; keep one indent width (2 or 4).</li>
+                    <li>Ensure every mapping key ends with <code class="bg-gray-100 px-1 rounded">:</code> plus a space before a same-line value.</li>
+                    <li>Quote colons inside plain strings, or use quoted scalars.</li>
+                    <li>Re-validate after each fix so line numbers stay meaningful.</li>
+                </ul>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/guides/" class="hover:text-gray-900">Guides</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">Tutorial</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">Q&A</a></li>
+                        <li><a href="/about.html" class="hover:text-gray-900">About</a></li>
+                        <li><a href="/privacy.html" class="hover:text-gray-900">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>

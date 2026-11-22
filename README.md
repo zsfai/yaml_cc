@@ -78,3 +78,15 @@ Simply upload all files to your web server. No server-side processing required -
 ## License
 
 This project is open source and available under the MIT License.
+
+
+## CSS build
+
+Site styles are compiled (no Tailwind CDN):
+
+```bash
+npm install
+npm run build:css
+```
+
+This writes `assets/css/site.css` (Tailwind utilities + `index.css` + `styles.css`).

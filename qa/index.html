@@ -5,148 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A - Frequently Asked Questions | YAML.cc</title>
     <meta name="description" content="Technical solutions for common YAML problems, error troubleshooting, and configuration issues.">
-    <meta name="keywords" content="yaml qa, yaml faq, yaml troubleshooting, yaml errors, yaml help">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yaml.cc/qa/">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../index.css" type="text/css">
-
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yaml.cc/qa/">
     <meta property="og:title" content="Q&A - Frequently Asked Questions | YAML.cc">
     <meta property="og:description" content="Technical solutions for common YAML problems, error troubleshooting, and configuration issues.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
-
-    <!-- Twitter -->
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yaml.cc/qa/">
     <meta property="twitter:title" content="Q&A - Frequently Asked Questions | YAML.cc">
     <meta property="twitter:description" content="Technical solutions for common YAML problems, error troubleshooting, and configuration issues.">
-    <meta property="twitter:image" content="https://yaml.cc/assets/images/yamllint.svg">
-    <body class="bg-white text-gray-900">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I fix ModuleNotFoundError: No module named 'yaml'?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Install PyYAML (pip install pyyaml). The import name is yaml even though the package name is PyYAML."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What causes 'mapping values are not allowed here' in YAML?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Usually incorrect indentation, a missing colon after a key, or a colon inside an unquoted string. Fix structure and validate with a YAML parser."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I create a YAML file?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Create a text file with a .yaml or .yml extension, write key-value pairs with consistent space indentation, and validate before use."
+                }
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://yaml.cc/"},
+            {"@type": "ListItem", "position": 2, "name": "Q&A", "item": "https://yaml.cc/qa/"}
+        ]
+    }
+    </script>
+</head>
+<body class="bg-white text-gray-900">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <a href="../" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
                 <ul class="hidden md:flex items-center gap-8 text-sm">
                     <li><a href="../#tools" class="text-gray-600 hover:text-gray-900 transition">YAML Tools</a></li>
-                    <li><a href="../#info-section" class="text-gray-600 hover:text-gray-900 transition">What is YAML?</a></li>
+                    <li><a href="../guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
                     <li><a href="../tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
                     <li><a href="./" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="../zh/" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm">
+                <a href="../#tools" class="block py-1">YAML Tools</a>
+                <a href="../guides/" class="block py-1">Guides</a>
+                <a href="../tutorial/" class="block py-1">Tutorial</a>
+                <a href="./" class="block py-1">Q&A</a>
+                <a href="../zh/" class="block py-1">中文</a>
             </div>
         </nav>
     </header>
 
     <main class="py-12 bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Breadcrumb -->
             <nav class="mb-8 text-sm">
                 <a href="../" class="text-blue-600 hover:text-blue-700">Home</a>
                 <span class="mx-2 text-gray-400">/</span>
                 <span class="text-gray-600">Q&A</span>
             </nav>
 
-            <header class="mb-10">
+            <header class="mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h1>
                 <p class="mt-3 text-gray-600 text-base">Technical references for common YAML issues and troubleshooting.</p>
             </header>
 
-            <ol class="space-y-3 list-decimal list-inside">
-                <li>
-                    <a href="modulenotfounderror-no-module-named-yaml.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        ModuleNotFoundError: No module named 'yaml'
-                    </a>
-                </li>
+            <section class="mb-10 rounded-lg border border-gray-200 bg-gray-50 p-5">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Guides</h2>
+                <p class="text-sm text-gray-700 mb-3">For a structured index of errors and learning path, start here:</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                    <li><a class="text-blue-600 hover:text-blue-700" href="../guides/yaml-errors.html">YAML Error Encyclopedia</a></li>
+                    <li><a class="text-blue-600 hover:text-blue-700" href="../guides/yaml-practical-guide.html">YAML Practical Guide</a></li>
+                    <li><a class="text-blue-600 hover:text-blue-700" href="../guides/">All guides</a></li>
+                </ul>
+            </section>
 
-                <li>
-                    <a href="how-to-create-a-yaml-file.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Create a YAML File
-                    </a>
-                </li>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Errors</h2>
+            <ul class="space-y-2 mb-8 list-disc list-inside text-gray-700">
+                <li><a href="yaml-scanner-scannererror-mapping-values-not-allowed.html" class="text-blue-600 hover:text-blue-700 hover:underline">YAML Scanner Error: Mapping Values Are Not Allowed Here</a></li>
+                <li><a href="yaml-line-5-did-not-find-expected-key.html" class="text-blue-600 hover:text-blue-700 hover:underline">YAML Line 5 Did Not Find Expected Key</a></li>
+                <li><a href="modulenotfounderror-no-module-named-yaml.html" class="text-blue-600 hover:text-blue-700 hover:underline">ModuleNotFoundError: No module named 'yaml'</a></li>
+                <li><a href="cant-import-glide-using-gopkg-in-yaml-v2.html" class="text-blue-600 hover:text-blue-700 hover:underline">Can't Import Glide Using gopkg.in/yaml.v2</a></li>
+            </ul>
 
-                <li>
-                    <a href="how-to-open-a-yaml-file.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Open a YAML File
-                    </a>
-                </li>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Getting started</h2>
+            <ul class="space-y-2 mb-8 list-disc list-inside text-gray-700">
+                <li><a href="how-to-create-a-yaml-file.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Create a YAML File</a></li>
+                <li><a href="how-to-open-a-yaml-file.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Open a YAML File</a></li>
+                <li><a href="python-read-yaml-file-to-dict.html" class="text-blue-600 hover:text-blue-700 hover:underline">Python Read YAML File to Dict</a></li>
+                <li><a href="what-is-pre-commit-config-yaml.html" class="text-blue-600 hover:text-blue-700 hover:underline">What is .pre-commit-config.yaml</a></li>
+                <li><a href="conda-create-environment-from-yml.html" class="text-blue-600 hover:text-blue-700 hover:underline">Conda Create Environment from YML</a></li>
+            </ul>
 
-                <li>
-                    <a href="how-to-get-openapi-yaml-from-json.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Get OpenAPI YAML from JSON
-                    </a>
-                </li>
-
-                <li>
-                    <a href="what-is-pre-commit-config-yaml.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        What is .pre-commit-config.yaml
-                    </a>
-                </li>
-
-                <li>
-                    <a href="cant-import-glide-using-gopkg-in-yaml-v2.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        Can't Import Glide Using gopkg.in/yaml.v2
-                    </a>
-                </li>
-
-                <li>
-                    <a href="python-read-yaml-file-to-dict.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        Python Read YAML File to Dict
-                    </a>
-                </li>
-
-                <li>
-                    <a href="conda-create-environment-from-yml.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        Conda Create Environment from YML
-                    </a>
-                </li>
-
-                <li>
-                    <a href="how-to-access-configuration-yaml-home-assistant.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Access Configuration.yaml in Home Assistant
-                    </a>
-                </li>
-
-                <li>
-                    <a href="how-to-edit-configuration-yaml-home-assistant.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Edit Configuration YAML in Home Assistant
-                    </a>
-                </li>
-
-                <li>
-                    <a href="how-to-create-deployment-yaml-file-in-kubernetes.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        How to Create Deployment YAML File in Kubernetes
-                    </a>
-                </li>
-
-                <li>
-                    <a href="sample-kubernetes-deployment-yaml-file-example.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        Sample Kubernetes Deployment YAML File Examples
-                    </a>
-                </li>
-
-                <li>
-                    <a href="yaml-line-5-did-not-find-expected-key.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        YAML Line 5 Did Not Find Expected Key
-                    </a>
-                </li>
-
-                <li>
-                    <a href="yaml-scanner-scannererror-mapping-values-not-allowed.html" class="text-blue-600 hover:text-blue-700 hover:underline">
-                        YAML Scanner Error: Mapping Values Are Not Allowed Here
-                    </a>
-                </li>
-            </ol>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Ecosystems</h2>
+            <ul class="space-y-2 mb-8 list-disc list-inside text-gray-700">
+                <li><a href="how-to-create-deployment-yaml-file-in-kubernetes.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Create Deployment YAML File in Kubernetes</a></li>
+                <li><a href="sample-kubernetes-deployment-yaml-file-example.html" class="text-blue-600 hover:text-blue-700 hover:underline">Sample Kubernetes Deployment YAML File Examples</a></li>
+                <li><a href="how-to-get-openapi-yaml-from-json.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Get OpenAPI YAML from JSON</a></li>
+                <li><a href="how-to-access-configuration-yaml-home-assistant.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Access Configuration.yaml in Home Assistant</a></li>
+                <li><a href="how-to-edit-configuration-yaml-home-assistant.html" class="text-blue-600 hover:text-blue-700 hover:underline">How to Edit Configuration YAML in Home Assistant</a></li>
+            </ul>
 
             <section class="mt-12 rounded-3xl border border-gray-200 bg-white p-6">
                 <h2 class="text-xl font-semibold text-gray-900">More resources</h2>
                 <p class="mt-2 text-sm text-gray-700">
                     See
-                    <a class="text-blue-600 hover:text-blue-700" href="../tutorial/">Tutorial</a>
-                    for complete guides, or use
+                    <a class="text-blue-600 hover:text-blue-700" href="../guides/">Guides</a>
+                    and
+                    <a class="text-blue-600 hover:text-blue-700" href="../tutorial/">Tutorial</a>,
+                    or use
                     <a class="text-blue-600 hover:text-blue-700" href="../#tools">YAML Tools</a>
                     for validation and conversion.
                 </p>
@@ -159,29 +157,43 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
-                    <p class="text-gray-600 text-sm">Professional YAML validation, formatting, and conversion tools for developers.</p>
+                    <p class="text-gray-600 text-sm">YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
                 </div>
                 <div>
                     <h4 class="text-gray-900 font-semibold mb-3">Tools</h4>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li><a href="../#tools" class="hover:text-gray-900 transition">YAML Validator</a></li>
-                        <li><a href="../#tools" class="hover:text-gray-900 transition">YAML Linter</a></li>
-                        <li><a href="../#tools" class="hover:text-gray-900 transition">YAML to JSON</a></li>
+                        <li><a href="../json-to-yaml.html" class="hover:text-gray-900 transition">JSON to YAML</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-gray-900 font-semibold mb-3">Resources</h4>
                     <ul class="space-y-2 text-sm text-gray-600">
-                        <li><a href="../#info-section" class="hover:text-gray-900 transition">What is YAML?</a></li>
+                        <li><a href="../guides/" class="hover:text-gray-900 transition">Guides</a></li>
                         <li><a href="../tutorial/" class="hover:text-gray-900 transition">Tutorial</a></li>
                         <li><a href="./" class="hover:text-gray-900 transition">Q&A</a></li>
+                        <li><a href="../about.html" class="hover:text-gray-900 transition">About</a></li>
+                        <li><a href="../privacy.html" class="hover:text-gray-900 transition">Privacy</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+
 </body>
 </html>

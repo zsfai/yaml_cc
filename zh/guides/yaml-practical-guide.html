@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML 实践指南 | YAML.cc</title>
+    <meta name="description" content="YAML 配置实践学习路径：基础语法、1.1/1.2 版本陷阱、工具选用，以及语言与生态专题入口，面向真实工程配置。">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/zh/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/yaml-practical-guide.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/zh/guides/yaml-practical-guide.html">
+    <meta property="og:title" content="YAML 实践指南 | YAML.cc">
+    <meta property="og:description" content="YAML 配置实践学习路径：基础语法、1.1/1.2 版本陷阱、工具选用，以及语言与生态专题入口，面向真实工程配置。">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="YAML 实践指南 | YAML.cc">
+    <meta property="twitter:description" content="YAML 配置实践学习路径：基础语法、1.1/1.2 版本陷阱、工具选用，以及语言与生态专题入口，面向真实工程配置。">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "YAML 实践指南",
+        "description": "YAML 配置实践学习路径：语法、版本陷阱、工具，以及语言与生态专题入口。",
+        "inLanguage": "zh-Hans",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/zh/guides/yaml-practical-guide.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"首页","item":"https://yaml.cc/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://yaml.cc/zh/guides/yaml-practical-guide.html"},{"@type":"ListItem","position":3,"name":"YAML 实践指南","item":"https://yaml.cc/zh/guides/yaml-practical-guide.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/zh/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">工具</a></li>
+                    <li><a href="/zh/guides/yaml-practical-guide.html" class="text-gray-600 hover:text-gray-900 transition">指南</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">教程</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">问答</a></li>
+                    <li><a href="https://yaml.cc/guides/yaml-practical-guide.html" class="text-gray-600 hover:text-gray-900 transition">English</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/zh/" class="text-blue-600 hover:text-blue-700">首页</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">指南</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">yaml practical guide</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">YAML 实践指南</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">直接回答</p>
+                    <p>YAML 是以缩进表达结构的数据序列化语言，广泛用于配置。建议掌握空格缩进规则，优先写出 YAML 1.2 安全的取值，部署前校验，并结合语言/生态指南落地。</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">适用场景</h2>
+                <p class="text-gray-700 mb-4">适合学习 Kubernetes、CI、Compose、应用配置等实践 YAML。本页是 <a class="text-blue-600" href="https://yaml.org/spec/1.2.2/">官方规范</a> 之上的实践层，不是规范替代。</p><p class="text-gray-700">若只需快速语法检查，请直接使用 <a class="text-blue-600" href="/#tools">在线校验工具</a>。</p>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">学习路径</h2>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/tutorial/basic-syntax.html">基础语法</a></li>
+<li><a class="text-blue-600" href="/zh/guides/yaml-1.1-vs-1.2.html">YAML 1.1 与 1.2</a></li>
+<li><a class="text-blue-600" href="/tutorial/advanced-features.html">锚点与多行字符串</a></li>
+<li><a class="text-blue-600" href="/zh/guides/yaml-cheat-sheet.html">速查表</a></li>
+<li>进入 <a class="text-blue-600" href="/zh/guides/ecosystems/kubernetes.html">生态</a> 或 <a class="text-blue-600" href="/zh/guides/languages/python.html">语言</a> 专题</li>
+</ol>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">最小示例</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>app:
+  name: demo
+  port: 8080
+features:
+  - logging
+  - metrics</code></pre></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">常见错误</h2>
+                <div class="rounded-lg bg-red-50 border border-red-200 p-4 mb-4"><p class="font-semibold text-red-800 mb-2">反例：使用 Tab 缩进</p><div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>app:
+	name: demo</code></pre></div></div><div class="rounded-lg bg-green-50 border border-green-200 p-4"><p class="font-semibold text-green-800 mb-2">正例：仅使用空格</p><div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>app:
+  name: demo</code></pre></div></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">相关链接</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="/zh/guides/yaml-errors.html">错误百科</a></li><li><a class="text-blue-600" href="/zh/guides/yaml-tools.html">工具全景</a></li><li><a class="text-blue-600" href="/qa/">英文 Q&amp;A</a></li></ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">生产检查清单</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>密钥不要明文写进 YAML。</li>
+                    <li>布尔优先 <code class="bg-gray-100 px-1 rounded">true</code>/<code class="bg-gray-100 px-1 rounded">false</code>；国家码等歧义值加引号。</li>
+                    <li>CI 中校验，解析失败即失败构建。</li>
+                </ul>
+            </section>
+
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">为什么团队需要实践层文档</h2>
+                <p class="text-gray-700 mb-3">官方规范定义语言规则，但工程里更常卡住的是：缩进、布尔歧义、多文档、密钥泄漏、以及 K8s/CI 等领域 schema。YAML.cc 把「能写对、能校验、能排查」作为目标，而不是复述规范全文。</p>
+                <p class="text-gray-700">建议把本站工具用于隐私粘贴检查，把 yamllint 放进 CI，把生态 dry-run 当作发布门禁。</p>
+            </section>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">最小可运行配置模板</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code># app.yaml
+service:
+  name: api
+  replicas: 2
+  env:
+    LOG_LEVEL: info
+features:
+  - metrics
+  - tracing</code></pre></div>
+                <p class="text-sm text-gray-600 mt-3">用空格缩进；布尔用 true/false；需要当字符串的 yes/NO 请加引号。</p>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">面向开发者的 YAML 校验、格式化与转换工具。处理均在浏览器本地完成。</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">资源</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/zh/guides/yaml-practical-guide.html" class="hover:text-gray-900">指南</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">教程</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">问答</a></li>
+                        <li><a href="/zh/about.html" class="hover:text-gray-900">关于</a></li>
+                        <li><a href="/zh/privacy.html" class="hover:text-gray-900">隐私</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">工具</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>

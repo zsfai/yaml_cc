@@ -9,21 +9,21 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yaml.cc/tutorial/">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yaml.cc/tutorial/">
     <meta property="og:title" content="YAML Tutorial - Complete Guide to YAML Syntax">
     <meta property="og:description" content="Learn YAML with our comprehensive tutorial series. Master YAML syntax, data types, advanced features, and best practices.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yaml.cc/tutorial/">
     <meta property="twitter:title" content="YAML Tutorial - Complete Guide to YAML Syntax">
     <meta property="twitter:description" content="Learn YAML with our comprehensive tutorial series. Master YAML syntax, data types, advanced features, and best practices.">
-    <meta property="twitter:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -67,6 +67,16 @@
                     <li><a href="../index.html#yaml-syntax">Syntax Guide</a></li>
                     <li><a href="../index.html#best-practices">Best Practices</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="../#tools" class="block py-1 text-gray-700">YAML Tools</a>
+                <a href="../guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="index.html" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="../qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="../zh/" class="block py-1 text-gray-700">中文</a>
             </div>
         </nav>
     </header>
@@ -81,6 +91,7 @@
             <div class="tutorial-cta">
                 <h2>Ready to Start Learning YAML?</h2>
                 <p>Begin with our basic syntax tutorial and work your way through our comprehensive guide.</p>
+                <p style="margin-top:1rem;">Also see the new <a href="../guides/">Guides hub</a>: <a href="../guides/yaml-practical-guide.html">Practical Guide</a>, <a href="../guides/yaml-1.1-vs-1.2.html">1.1 vs 1.2</a>, <a href="../guides/yaml-cheat-sheet.html">Cheat Sheet</a>, <a href="../guides/yaml-errors.html">Errors</a>, <a href="../guides/yaml-tools.html">Tools</a>.</p>
             </div>
 
             <div class="tutorial-progress">
@@ -115,7 +126,7 @@
 
             <div class="tutorial-grid">
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">📚</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="basic-syntax.html">Basic Syntax</a></h3>
                     <p>Learn the fundamentals of YAML syntax, including indentation, comments, and basic structure.</p>
                     <ul class="tutorial-topics">
@@ -128,7 +139,7 @@
                 </div>
 
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">🔢</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="data-types.html">Data Types</a></h3>
                     <p>Understand YAML data types including strings, numbers, booleans, arrays, and objects.</p>
                     <ul class="tutorial-topics">
@@ -141,7 +152,7 @@
                 </div>
 
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">⚡</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="advanced-features.html">Advanced Features</a></h3>
                     <p>Explore advanced YAML features like anchors, aliases, multiline strings, and flow styles.</p>
                     <ul class="tutorial-topics">
@@ -154,7 +165,7 @@
                 </div>
 
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">✨</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="best-practices.html">Best Practices</a></h3>
                     <p>Learn YAML best practices for writing clean, maintainable, and efficient YAML files.</p>
                     <ul class="tutorial-topics">
@@ -167,7 +178,7 @@
                 </div>
 
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">💼</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="real-world-examples.html">Real-World Examples</a></h3>
                     <p>See YAML in action with practical examples from Docker, Kubernetes, CI/CD, and more.</p>
                     <ul class="tutorial-topics">
@@ -180,7 +191,7 @@
                 </div>
 
                 <div class="tutorial-card">
-                    <div class="tutorial-icon">🛠️</div>
+                    <div class="tutorial-icon"></div>
                     <h3><a href="tools-and-validation.html">Tools & Validation</a></h3>
                     <p>Discover tools for validating, formatting, and working with YAML files effectively.</p>
                     <ul class="tutorial-topics">
@@ -200,7 +211,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>YAML.cc</h3>
-                    <p>Professional YAML validation, formatting, and conversion tools for developers. The most trusted YAML tools platform.</p>
+                    <p>YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Tools</h4>
@@ -230,9 +241,20 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

@@ -9,21 +9,21 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yaml.cc/tutorial/data-types.html">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://yaml.cc/tutorial/data-types.html">
     <meta property="og:title" content="YAML Data Types - Strings, Numbers, Arrays & Objects">
     <meta property="og:description" content="Learn YAML data types including strings, numbers, booleans, arrays, objects, and null values. Complete guide with examples.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yaml.cc/tutorial/data-types.html">
     <meta property="twitter:title" content="YAML Data Types - Strings, Numbers, Arrays & Objects">
     <meta property="twitter:description" content="Learn YAML data types including strings, numbers, booleans, arrays, objects, and null values. Complete guide with examples.">
-    <meta property="twitter:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -65,6 +65,16 @@
                     <li><a href="../index.html#yaml-syntax">Syntax Guide</a></li>
                     <li><a href="../index.html#best-practices">Best Practices</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="../#tools" class="block py-1 text-gray-700">YAML Tools</a>
+                <a href="../guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="index.html" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="../qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="../zh/" class="block py-1 text-gray-700">中文</a>
             </div>
         </nav>
     </header>
@@ -86,27 +96,27 @@
                     
                     <div class="data-types-grid">
                         <div class="data-type-card">
-                            <h3>🔤 Strings</h3>
+                            <h3> Strings</h3>
                             <p>Text data with various formatting options</p>
                         </div>
                         <div class="data-type-card">
-                            <h3>🔢 Numbers</h3>
+                            <h3> Numbers</h3>
                             <p>Integers, floats, and scientific notation</p>
                         </div>
                         <div class="data-type-card">
-                            <h3>✅ Booleans</h3>
+                            <h3> Booleans</h3>
                             <p>True/false values and alternatives</p>
                         </div>
                         <div class="data-type-card">
-                            <h3>📋 Arrays</h3>
+                            <h3> Arrays</h3>
                             <p>Lists and collections of items</p>
                         </div>
                         <div class="data-type-card">
-                            <h3>🗂️ Objects</h3>
+                            <h3>️ Objects</h3>
                             <p>Key-value pairs and nested structures</p>
                         </div>
                         <div class="data-type-card">
-                            <h3>❌ Null</h3>
+                            <h3> Null</h3>
                             <p>Empty or missing values</p>
                         </div>
                     </div>
@@ -264,8 +274,8 @@ boolean_examples:
                     </div>
 
                     <div class="important-box">
-                        <h3>⚠️ Important Note:</h3>
-                        <p>YAML is case-sensitive for boolean values. <code>True</code> and <code>true</code> are different - only lowercase values are recognized as booleans.</p>
+                        <h3>Note: Important Note:</h3>
+                        <p>Boolean rules depend on the YAML version and parser. Prefer <code>true</code>/<code>false</code>. In YAML 1.1, values like <code>yes</code>/<code>no</code>/<code>on</code>/<code>off</code> (and some uppercase forms) may also become booleans; in YAML 1.2 JSON/core schemas they usually stay strings. Quote ambiguous values when you mean text. See <a href="../guides/yaml-1.1-vs-1.2.html">YAML 1.1 vs 1.2</a>.</p>
                     </div>
                 </section>
 
@@ -531,7 +541,7 @@ url: "https://example.com"  # Colons and slashes</code></pre>
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>YAML.cc</h3>
-                    <p>Professional YAML validation, formatting, and conversion tools for developers. The most trusted YAML tools platform.</p>
+                    <p>YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Tools</h4>
@@ -552,9 +562,20 @@ url: "https://example.com"  # Colons and slashes</code></pre>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

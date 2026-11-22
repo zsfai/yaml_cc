@@ -9,21 +9,21 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yaml.cc/tutorial/best-practices.html">
     <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://yaml.cc/tutorial/best-practices.html">
     <meta property="og:title" content="YAML Best Practices - Writing Clean & Maintainable YAML">
     <meta property="og:description" content="Learn YAML best practices for writing clean, maintainable, and efficient YAML files. Professional guidelines and common pitfalls to avoid.">
-    <meta property="og:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yaml.cc/tutorial/best-practices.html">
     <meta property="twitter:title" content="YAML Best Practices - Writing Clean & Maintainable YAML">
     <meta property="twitter:description" content="Learn YAML best practices for writing clean, maintainable, and efficient YAML files. Professional guidelines and common pitfalls to avoid.">
-    <meta property="twitter:image" content="https://yaml.cc/assets/images/yamllint.svg">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -65,6 +65,16 @@
                     <li><a href="../index.html#yaml-syntax">Syntax Guide</a></li>
                     <li><a href="../index.html#best-practices">Best Practices</a></li>
                 </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="../#tools" class="block py-1 text-gray-700">YAML Tools</a>
+                <a href="../guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="index.html" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="../qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="../zh/" class="block py-1 text-gray-700">中文</a>
             </div>
         </nav>
     </header>
@@ -85,7 +95,7 @@
                     <p>Consistent formatting makes YAML files easier to read, maintain, and debug. Follow these guidelines for professional YAML files.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Indentation Best Practices</h3>
+                        <h3> Indentation Best Practices</h3>
                         <ul>
                             <li><strong>Use 2 spaces per indentation level</strong> - Most common and readable</li>
                             <li><strong>Never mix tabs and spaces</strong> - Choose one and stick to it</li>
@@ -96,7 +106,7 @@
 
                     <div class="code-example">
                         <h3>Good Indentation</h3>
-                        <pre><code># ✅ Good - consistent 2-space indentation
+                        <pre><code>#  Good - consistent 2-space indentation
 database:
   host: localhost
   port: 5432
@@ -110,7 +120,7 @@ database:
 
                     <div class="code-example">
                         <h3>Bad Indentation</h3>
-                        <pre><code># ❌ Bad - inconsistent indentation
+                        <pre><code>#  Bad - inconsistent indentation
 database:
     host: localhost
   port: 5432
@@ -125,7 +135,7 @@ database:
                     <p>Use clear, descriptive names that follow consistent conventions throughout your YAML files.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Naming Best Practices</h3>
+                        <h3> Naming Best Practices</h3>
                         <ul>
                             <li><strong>Use snake_case for keys</strong> - Most common in YAML</li>
                             <li><strong>Use descriptive names</strong> - Avoid abbreviations when possible</li>
@@ -136,7 +146,7 @@ database:
 
                     <div class="code-example">
                         <h3>Good Naming</h3>
-                        <pre><code># ✅ Good - clear, descriptive names
+                        <pre><code>#  Good - clear, descriptive names
 application:
   name: "My Application"
   version: "2.1.0"
@@ -156,7 +166,7 @@ api_settings:
 
                     <div class="code-example">
                         <h3>Bad Naming</h3>
-                        <pre><code># ❌ Bad - unclear, inconsistent names
+                        <pre><code>#  Bad - unclear, inconsistent names
 app:
   n: "My Application"  # Too short
   v: "2.1.0"           # Abbreviation
@@ -179,7 +189,7 @@ api:                   # Inconsistent with db_config above
                     <p>Proper string handling prevents common YAML parsing issues and improves readability.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ String Best Practices</h3>
+                        <h3> String Best Practices</h3>
                         <ul>
                             <li><strong>Quote strings with special characters</strong> - Colons, quotes, etc.</li>
                             <li><strong>Use consistent quoting style</strong> - Prefer double quotes</li>
@@ -190,7 +200,7 @@ api:                   # Inconsistent with db_config above
 
                     <div class="code-example">
                         <h3>Good String Handling</h3>
-                        <pre><code># ✅ Good - proper string quoting
+                        <pre><code>#  Good - proper string quoting
 user:
   name: "John Doe"
   email: "john@example.com"
@@ -208,7 +218,7 @@ error_message: |
 
                     <div class="code-example">
                         <h3>Bad String Handling</h3>
-                        <pre><code># ❌ Bad - unquoted special values
+                        <pre><code>#  Bad - unquoted special values
 user:
   name: John Doe
   email: john@example.com
@@ -227,7 +237,7 @@ error_message: An error occurred while processing your request. Please check you
                     <p>Well-documented YAML files are easier to understand and maintain. Use comments strategically.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Comment Best Practices</h3>
+                        <h3> Comment Best Practices</h3>
                         <ul>
                             <li><strong>Document complex configurations</strong> - Explain non-obvious settings</li>
                             <li><strong>Use section headers</strong> - Group related settings</li>
@@ -298,7 +308,7 @@ api:
                     <p>Well-organized YAML files are easier to navigate and maintain. Follow logical grouping principles.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Structure Best Practices</h3>
+                        <h3> Structure Best Practices</h3>
                         <ul>
                             <li><strong>Group related settings together</strong> - Database, API, logging, etc.</li>
                             <li><strong>Use consistent hierarchy</strong> - Don't mix different organizational patterns</li>
@@ -394,7 +404,7 @@ app:
                     <p>Optimize your YAML files for better performance and faster parsing.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Performance Best Practices</h3>
+                        <h3> Performance Best Practices</h3>
                         <ul>
                             <li><strong>Use anchors for repeated values</strong> - Reduces file size</li>
                             <li><strong>Avoid deeply nested structures</strong> - Slower to parse</li>
@@ -431,7 +441,7 @@ config:
                     <p>Learn about common YAML mistakes and how to avoid them.</p>
                     
                     <div class="warning-box">
-                        <h3>⚠️ Common Pitfalls</h3>
+                        <h3>Note: Common Pitfalls</h3>
                         <ul>
                             <li><strong>Inconsistent indentation</strong> - Mixing tabs and spaces</li>
                             <li><strong>Unquoted special values</strong> - Dates, numbers, booleans</li>
@@ -444,23 +454,23 @@ config:
 
                     <div class="code-example">
                         <h3>Common Mistakes</h3>
-                        <pre><code># ❌ Wrong - missing colon
+                        <pre><code>#  Wrong - missing colon
 name John Doe
 
-# ❌ Wrong - inconsistent indentation
+#  Wrong - inconsistent indentation
 person:
   name: John
     age: 30
 
-# ❌ Wrong - unquoted special values
+#  Wrong - unquoted special values
 date: 2023-12-25
 phone: 555-1234
 status: active
 
-# ❌ Wrong - using brackets for lists
+#  Wrong - using brackets for lists
 fruits: [apple, banana, orange]
 
-# ❌ Wrong - circular reference
+#  Wrong - circular reference
 user1: &user1
   name: John
   friend: *user2
@@ -471,26 +481,26 @@ user2: &user2
 
                     <div class="code-example">
                         <h3>Corrected Version</h3>
-                        <pre><code># ✅ Correct - proper colon
+                        <pre><code>#  Correct - proper colon
 name: John Doe
 
-# ✅ Correct - consistent indentation
+#  Correct - consistent indentation
 person:
   name: John
   age: 30
 
-# ✅ Correct - quoted special values
+#  Correct - quoted special values
 date: "2023-12-25"
 phone: "555-1234"
 status: "active"
 
-# ✅ Correct - proper list syntax
+#  Correct - proper list syntax
 fruits:
   - apple
   - banana
   - orange
 
-# ✅ Correct - no circular references
+#  Correct - no circular references
 user1:
   name: John
   friend: "Jane"
@@ -505,7 +515,7 @@ user2:
                     <p>Always validate your YAML files to catch errors early and ensure they work as expected.</p>
                     
                     <div class="best-practices-box">
-                        <h3>✅ Validation Best Practices</h3>
+                        <h3> Validation Best Practices</h3>
                         <ul>
                             <li><strong>Use YAML validators</strong> - Check syntax before deployment</li>
                             <li><strong>Test with your application</strong> - Ensure it parses correctly</li>
@@ -538,7 +548,7 @@ except yaml.YAMLError as e:
                     <p>Keep security in mind when writing YAML files, especially for configuration files.</p>
                     
                     <div class="warning-box">
-                        <h3>🔒 Security Best Practices</h3>
+                        <h3> Security Best Practices</h3>
                         <ul>
                             <li><strong>Never commit secrets</strong> - Use environment variables or secret management</li>
                             <li><strong>Use placeholders for sensitive data</strong> - <code>${SECRET_KEY}</code></li>
@@ -549,7 +559,7 @@ except yaml.YAMLError as e:
 
                     <div class="code-example">
                         <h3>Secure Configuration</h3>
-                        <pre><code># ✅ Good - use environment variables
+                        <pre><code>#  Good - use environment variables
 database:
   host: "${DB_HOST}"
   port: "${DB_PORT}"
@@ -560,7 +570,7 @@ api:
   secret_key: "${API_SECRET_KEY}"
   jwt_secret: "${JWT_SECRET}"
 
-# ❌ Bad - hardcoded secrets
+#  Bad - hardcoded secrets
 database:
   host: "db.example.com"
   port: 5432
@@ -665,7 +675,7 @@ api:
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>YAML.cc</h3>
-                    <p>Professional YAML validation, formatting, and conversion tools for developers. The most trusted YAML tools platform.</p>
+                    <p>YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Tools</h4>
@@ -686,9 +696,20 @@ api:
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 YAML.cc. All rights reserved.</p>
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
 </body>
 </html>

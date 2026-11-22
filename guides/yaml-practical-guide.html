@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML Practical Guide | YAML.cc</title>
+    <meta name="description" content="A practical learning path for YAML configuration: syntax, version pitfalls, tools, and links to language and ecosystem guides.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/yaml-practical-guide.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/yaml-practical-guide.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/guides/yaml-practical-guide.html">
+    <meta property="og:title" content="YAML Practical Guide | YAML.cc">
+    <meta property="og:description" content="A practical learning path for YAML configuration: syntax, version pitfalls, tools, and links to language and ecosystem guides.">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="YAML Practical Guide | YAML.cc">
+    <meta property="twitter:description" content="A practical learning path for YAML configuration: syntax, version pitfalls, tools, and links to language and ecosystem guides.">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "YAML Practical Guide",
+        "description": "A practical learning path for YAML configuration: syntax, version pitfalls, tools, and links to language and ecosystem guides.",
+        "inLanguage": "en",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/guides/yaml-practical-guide.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://yaml.cc/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://yaml.cc/guides/"},{"@type":"ListItem","position":3,"name":"YAML Practical Guide","item":"https://yaml.cc/guides/yaml-practical-guide.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">Tools</a></li>
+                    <li><a href="/guides/" class="text-gray-600 hover:text-gray-900 transition">Guides</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">Tutorial</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">Q&A</a></li>
+                    <li><a href="https://yaml.cc/zh/guides/yaml-practical-guide.html" class="text-gray-600 hover:text-gray-900 transition">中文</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/" class="text-blue-600 hover:text-blue-700">Home</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">Guides</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">yaml practical guide</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">YAML Practical Guide</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">Direct answer</p>
+                    <p>YAML is a human-readable data serialization language used mainly for configuration. Learn indentation-based syntax, prefer YAML 1.2-safe values, validate before deploy, and use language/ecosystem guides for production patterns.</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">When to use this guide</h2>
+                <p class="text-gray-700 mb-4">Use this page as a learning path for configuration YAML (Kubernetes, CI, Compose, app config). It is a practical layer on top of the official specification at <a class="text-blue-600" href="https://yaml.org/spec/1.2.2/">yaml.org</a>, not a replacement for it.</p><p class="text-gray-700">Skip this if you only need a one-line syntax check — use the <a class="text-blue-600" href="/#tools">YAML validator</a> instead.</p>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Learning path</h2>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/tutorial/basic-syntax.html">Basic syntax</a> — indentation, keys, lists</li>
+<li><a class="text-blue-600" href="/guides/yaml-1.1-vs-1.2.html">YAML 1.1 vs 1.2</a> — boolean and number traps</li>
+<li><a class="text-blue-600" href="/tutorial/advanced-features.html">Anchors and multiline</a></li>
+<li><a class="text-blue-600" href="/guides/yaml-cheat-sheet.html">Cheat sheet</a> for quick lookup</li>
+<li>Apply with a <a class="text-blue-600" href="/guides/ecosystems/kubernetes.html">ecosystem hub</a> or <a class="text-blue-600" href="/guides/languages/python.html">language hub</a></li>
+</ol>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Minimal valid example</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code># config.yaml
+app:
+  name: demo
+  port: 8080
+features:
+  - logging
+  - metrics</code></pre></div><p class="mt-3 text-sm text-gray-600">Validated as YAML 1.2-compatible plain data (js-yaml / PyYAML safe_load).</p>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Common mistakes</h2>
+                <div class="space-y-4">
+<div class="rounded-lg bg-red-50 border border-red-200 p-4"><p class="font-semibold text-red-800 mb-2">Incorrect: tabs for indentation</p><div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>app:
+	name: demo</code></pre></div></div>
+<div class="rounded-lg bg-green-50 border border-green-200 p-4"><p class="font-semibold text-green-800 mb-2">Correct: spaces only</p><div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>app:
+  name: demo</code></pre></div></div></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">References</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="https://yaml.org/spec/1.2.2/">YAML 1.2.2 specification</a></li><li><a class="text-blue-600" href="/tutorial/">Tutorial series</a></li><li><a class="text-blue-600" href="/guides/yaml-errors.html">Error encyclopedia</a></li></ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Related</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="/guides/yaml-tools.html">Tools landscape</a></li><li><a class="text-blue-600" href="/qa/">Q&amp;A index</a></li></ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Production checklist</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>No secrets in plain YAML — use env vars or a secret manager.</li>
+                    <li>Prefer <code class="bg-gray-100 px-1 rounded">true</code>/<code class="bg-gray-100 px-1 rounded">false</code>; quote country codes and yes/no when they are strings.</li>
+                    <li>Validate in CI; fail the pipeline on parser errors.</li>
+                    <li>Document required keys for teammates (or attach a JSON Schema where supported).</li>
+                </ul>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">YAML validation, formatting, and conversion tools for developers. Processing stays in your browser.</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/guides/" class="hover:text-gray-900">Guides</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">Tutorial</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">Q&A</a></li>
+                        <li><a href="/about.html" class="hover:text-gray-900">About</a></li>
+                        <li><a href="/privacy.html" class="hover:text-gray-900">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>

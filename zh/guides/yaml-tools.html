@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAML 工具与校验全景 | YAML.cc</title>
+    <meta name="description" content="YAML 校验器、linter 与转换工具概览：YAML.cc 浏览器工具、yamllint、yq 及选用建议。">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/zh/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/yaml-tools.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/yaml-tools.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/zh/guides/yaml-tools.html">
+    <meta property="og:title" content="YAML 工具与校验全景 | YAML.cc">
+    <meta property="og:description" content="YAML 校验器、linter 与转换工具概览：YAML.cc 浏览器工具、yamllint、yq 及选用建议。">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="YAML 工具与校验全景 | YAML.cc">
+    <meta property="twitter:description" content="YAML 校验器、linter 与转换工具概览：YAML.cc 浏览器工具、yamllint、yq 及选用建议。">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "YAML 工具全景",
+        "description": "YAML 校验器、linter 与转换工具概览：YAML.cc 浏览器工具、yamllint、yq 及选用建议。",
+        "inLanguage": "zh-Hans",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/zh/guides/yaml-tools.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"首页","item":"https://yaml.cc/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://yaml.cc/zh/guides/yaml-practical-guide.html"},{"@type":"ListItem","position":3,"name":"YAML 工具全景","item":"https://yaml.cc/zh/guides/yaml-tools.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/zh/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">工具</a></li>
+                    <li><a href="/zh/guides/yaml-practical-guide.html" class="text-gray-600 hover:text-gray-900 transition">指南</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">教程</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">问答</a></li>
+                    <li><a href="https://yaml.cc/guides/yaml-tools.html" class="text-gray-600 hover:text-gray-900 transition">English</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/zh/" class="text-blue-600 hover:text-blue-700">首页</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">指南</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">yaml tools</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">YAML 工具全景</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">直接回答</p>
+                    <p>隐私粘贴检查用浏览器工具，仓库风格规则用 yamllint，批量转换与查询用 yq 或各语言库。YAML.cc 不会上传你的文件。</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">本站工具</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+<li><a class="text-blue-600" href="/#tools">校验 / 格式化 / 转 JSON</a></li>
+<li><a class="text-blue-600" href="/json-to-yaml.html">JSON 转 YAML</a></li>
+</ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">命令行</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>pip install yamllint && yamllint config.yaml
+yq -o=json '.' config.yaml</code></pre></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">相关</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="/zh/guides/yaml-practical-guide.html">实践指南</a></li></ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">推荐工作流</h2>
+                <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                    <li>能开 Schema 的编辑器优先开（K8s、Compose、Actions）。</li>
+                    <li>用 <a class="text-blue-600" href="/#tools">YAML.cc</a> 做隐私粘贴语法检查。</li>
+                    <li>CI 中用 yamllint 统一风格。</li>
+                    <li>再用生态专用检查（kubectl dry-run、ansible syntax-check 等）。</li>
+                </ol>
+            </section>
+
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">YAML.cc 工具能力</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>语法校验、格式化、转 JSON（浏览器本地）。</li>
+                    <li>Multi-doc：按 <code class="bg-gray-100 px-1 rounded">---</code> 拆分多文档。</li>
+                    <li>YAML 1.2 / 1.1-aware 模式与真值警告。</li>
+                    <li>可选 JSON Schema 校验（Ajv，仍在本地执行）。</li>
+                    <li>JSON/TOML/JSONL 等互转页面。</li>
+                </ul>
+            </section>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">与 CLI 的分工</h2>
+                <p class="text-gray-700 mb-3">在线工具适合临时、含敏感信息的粘贴检查；仓库级规则用 yamllint；结构化查询用 yq；领域正确性用 kubectl/ansible 等原生命令。</p>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">面向开发者的 YAML 校验、格式化与转换工具。处理均在浏览器本地完成。</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">资源</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/zh/guides/yaml-practical-guide.html" class="hover:text-gray-900">指南</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">教程</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">问答</a></li>
+                        <li><a href="/zh/about.html" class="hover:text-gray-900">关于</a></li>
+                        <li><a href="/zh/privacy.html" class="hover:text-gray-900">隐私</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">工具</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>

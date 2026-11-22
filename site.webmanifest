@@ -1,0 +1,17 @@
+{
+  "name": "YAML.cc",
+  "short_name": "YAML.cc",
+  "description": "YAML validator, formatter, and converter tools",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "/assets/images/yamllint.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

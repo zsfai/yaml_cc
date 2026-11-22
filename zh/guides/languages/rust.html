@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust 中的 YAML | YAML.cc</title>
+    <meta name="description" content="在 Rust 中使用 YAML（serde_yaml）：安全加载示例、常见坑与 YAML.cc 工具/问答链接。">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yaml.cc/zh/guides/languages/rust.html">
+    <link rel="alternate" hreflang="en" href="https://yaml.cc/guides/languages/rust.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://yaml.cc/zh/guides/languages/rust.html">
+    <link rel="alternate" hreflang="x-default" href="https://yaml.cc/guides/languages/rust.html">
+    <link rel="icon" type="image/x-icon" href="/assets/images/yamllint.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yaml.cc/zh/guides/languages/rust.html">
+    <meta property="og:title" content="Rust 中的 YAML | YAML.cc">
+    <meta property="og:description" content="在 Rust 中使用 YAML（serde_yaml）：安全加载示例、常见坑与 YAML.cc 工具/问答链接。">
+    <meta property="og:image" content="https://yaml.cc/assets/images/og-default.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Rust 中的 YAML | YAML.cc">
+    <meta property="twitter:description" content="在 Rust 中使用 YAML（serde_yaml）：安全加载示例、常见坑与 YAML.cc 工具/问答链接。">
+    <meta property="twitter:image" content="https://yaml.cc/assets/images/og-default.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Rust 中的 YAML",
+        "description": "在 Rust 中使用 YAML（serde_yaml）：安全加载示例、常见坑与 YAML.cc 工具/问答链接。",
+        "inLanguage": "zh-Hans",
+        "author": {"@type": "Organization", "name": "YAML.cc", "url": "https://yaml.cc"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "YAML.cc",
+            "logo": {"@type": "ImageObject", "url": "https://yaml.cc/assets/images/yamllint.svg"}
+        },
+        "mainEntityOfPage": "https://yaml.cc/zh/guides/languages/rust.html",
+        "dateModified": "2026-03-22"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{"@type":"ListItem","position":1,"name":"首页","item":"https://yaml.cc/zh/"},{"@type":"ListItem","position":2,"name":"语言","item":"https://yaml.cc/zh/guides/languages/python.html"},{"@type":"ListItem","position":3,"name":"Rust","item":"https://yaml.cc/zh/guides/languages/rust.html"}]
+    }
+    </script>
+
+</head>
+<body class="bg-white text-gray-900">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/zh/" class="text-lg font-semibold text-gray-900 hover:text-gray-700">YAML.cc</a>
+                <ul class="hidden md:flex items-center gap-8 text-sm">
+                    <li><a href="/#tools" class="text-gray-600 hover:text-gray-900 transition">工具</a></li>
+                    <li><a href="/zh/guides/yaml-practical-guide.html" class="text-gray-600 hover:text-gray-900 transition">指南</a></li>
+                    <li><a href="/tutorial/" class="text-gray-600 hover:text-gray-900 transition">教程</a></li>
+                    <li><a href="/qa/" class="text-gray-600 hover:text-gray-900 transition">问答</a></li>
+                    <li><a href="https://yaml.cc/guides/languages/rust.html" class="text-gray-600 hover:text-gray-900 transition">English</a></li>
+                </ul>
+                <button type="button" class="md:hidden p-2 text-gray-700" data-mobile-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+            </div>
+                    <div id="mobile-nav" class="hidden md:hidden border-t border-gray-200 px-4 py-3 space-y-2 text-sm bg-white">
+                <a href="/#tools" class="block py-1 text-gray-700">Tools</a>
+                <a href="/guides/" class="block py-1 text-gray-700">Guides</a>
+                <a href="/tutorial/" class="block py-1 text-gray-700">Tutorial</a>
+                <a href="/qa/" class="block py-1 text-gray-700">Q&A</a>
+                <a href="/zh/" class="block py-1 text-gray-700">中文</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-12 bg-white">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="mb-8 text-sm"><a href="/zh/" class="text-blue-600 hover:text-blue-700">首页</a><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">指南</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">语言</span><span class="mx-2 text-gray-400">/</span><span class="text-gray-600">rust</span></nav>
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Rust 中的 YAML</h1>
+                <div class="rounded-lg border border-gray-200 bg-gray-50 p-5 text-gray-700 leading-relaxed">
+                    <p class="font-medium text-gray-900 mb-2">直接回答</p>
+                    <p>在 Rust 中用 serde_yaml 等维护中的库加载 YAML，对不可信输入使用安全/类型化 API，并在部署前校验文件。</p>
+                </div>
+            </header>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">常用库</h2>
+                <p class="text-gray-700 mb-3"><strong>serde_yaml</strong></p>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">示例</h2>
+                <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto"><pre class="text-sm text-gray-200"><code>// Cargo: serde_yaml
+let v: serde_yaml::Value = serde_yaml::from_str(text)?;</code></pre></div>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">常见坑</h2>
+                <ul class='list-disc list-inside text-gray-700 space-y-2'><li>使用维护中的库（serde_yaml）</li><li>对不可信输入使用安全/类型化 API</li><li>部署前先校验 YAML 语法与结构</li></ul>
+            </section><section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">相关</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2"><li><a class="text-blue-600" href="/guides/yaml-tools.html">相关资源</a></li><li><a class="text-blue-600" href="/zh/guides/yaml-errors.html">错误百科</a></li></ul>
+            </section>
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">校验建议</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>在 CI 中对样例 YAML 做加载单测。</li>
+                    <li>安全/类型化解析失败应直接拒绝。</li>
+                    <li>歧义标量对照 <a class="text-blue-600" href="/zh/guides/yaml-1.1-vs-1.2.html">1.1 与 1.2</a>。</li>
+                    <li>快速检查可用 <a class="text-blue-600" href="/#tools">浏览器校验器</a>。</li>
+                </ul>
+            </section>
+
+        
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">工程实践</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>配置与密钥分离：密钥走环境变量或密钥管理，不进仓库明文 YAML。</li>
+                    <li>为关键配置写加载单测，锁定解析库主版本。</li>
+                    <li>对外部输入做大小限制，避免超大 YAML 造成内存压力。</li>
+                    <li>需要注释保留时，评估专用库（如 Python 的 ruamel.yaml）。</li>
+                </ul>
+            </section>
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">下一步</h2>
+                <p class="text-gray-700">结合 <a class="text-blue-600" href="/zh/guides/yaml-1.1-vs-1.2.html">版本差异</a> 与 <a class="text-blue-600" href="/#tools">在线校验</a>，再在 CI 中固定同一解析库版本，避免「本地能过、流水线失败」。</p>
+            </section>
+
+        </article>
+    </main>
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-gray-900 font-bold text-lg mb-3">YAML.cc</h3>
+                    <p class="text-gray-600 text-sm">面向开发者的 YAML 校验、格式化与转换工具。处理均在浏览器本地完成。</p>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">资源</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/zh/guides/yaml-practical-guide.html" class="hover:text-gray-900">指南</a></li>
+                        <li><a href="/tutorial/" class="hover:text-gray-900">教程</a></li>
+                        <li><a href="/qa/" class="hover:text-gray-900">问答</a></li>
+                        <li><a href="/zh/about.html" class="hover:text-gray-900">关于</a></li>
+                        <li><a href="/zh/privacy.html" class="hover:text-gray-900">隐私</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gray-900 font-semibold mb-3">工具</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="/#tools" class="hover:text-gray-900">YAML Validator</a></li>
+                        <li><a href="/json-to-yaml.html" class="hover:text-gray-900">JSON to YAML</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 YAML.cc. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('aria-controls');
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    var open = panel.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+</script>
+</body>
+</html>
