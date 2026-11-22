@@ -99,26 +99,13 @@ class JSONToYAMLTool {
             const html = `
                 <div class="result-success">
                     <div class="result-header">
-                        <span class="result-icon">✅</span>
                         <h3>Valid JSON</h3>
                     </div>
                     <div class="result-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Root type:</span>
-                            <span class="stat-value">${type}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Top-level keys:</span>
-                            <span class="stat-value">${keys}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Input size:</span>
-                            <span class="stat-value">${new Blob([input]).size} bytes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Lines:</span>
-                            <span class="stat-value">${input.split('\n').length}</span>
-                        </div>
+                        <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">${type}</span></div>
+                        <div class="stat-item"><span class="stat-label">Keys</span><span class="stat-value">${keys}</span></div>
+                        <div class="stat-item"><span class="stat-label">Size</span><span class="stat-value">${new Blob([input]).size} B</span></div>
+                        <div class="stat-item"><span class="stat-label">Lines</span><span class="stat-value">${input.split('\n').length}</span></div>
                     </div>
                 </div>
             `;
@@ -148,8 +135,7 @@ class JSONToYAMLTool {
             const html = `
                 <div class="result-success">
                     <div class="result-header">
-                        <span class="result-icon">⚡</span>
-                        <h3>JSON Formatted Successfully</h3>
+                        <h3>Formatted</h3>
                     </div>
                     <div class="formatted-code">
                         <pre><code>${this.escapeHtml(formatted)}</code></pre>
@@ -195,26 +181,13 @@ class JSONToYAMLTool {
             const html = `
                 <div class="result-success">
                     <div class="result-header">
-                        <span class="result-icon">🔄</span>
-                        <h3>Converted to YAML Successfully</h3>
+                        <h3>Converted to YAML</h3>
                     </div>
                     <div class="result-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">JSON Size:</span>
-                            <span class="stat-value">${jsonSize} bytes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">YAML Size:</span>
-                            <span class="stat-value">${yamlSize} bytes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Size change:</span>
-                            <span class="stat-value">${sizeDiff > 0 ? '+' : ''}${sizeDiff}%</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">YAML lines:</span>
-                            <span class="stat-value">${yamlString.split('\n').length}</span>
-                        </div>
+                        <div class="stat-item"><span class="stat-label">JSON</span><span class="stat-value">${jsonSize} B</span></div>
+                        <div class="stat-item"><span class="stat-label">YAML</span><span class="stat-value">${yamlSize} B</span></div>
+                        <div class="stat-item"><span class="stat-label">Delta</span><span class="stat-value">${sizeDiff > 0 ? '+' : ''}${sizeDiff}%</span></div>
+                        <div class="stat-item"><span class="stat-label">Lines</span><span class="stat-value">${yamlString.split('\n').length}</span></div>
                     </div>
                     <div class="formatted-code">
                         <pre><code>${this.escapeHtml(yamlString)}</code></pre>
@@ -241,7 +214,7 @@ class JSONToYAMLTool {
     }
 
     showInfo(resultDiv, message) {
-        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 1rem;">${this.escapeHtml('💡 ' + message)}</pre>`;
+        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 0.75rem; font-size: 13px;">${this.escapeHtml(message)}</pre>`;
     }
 
     showJSONError(resultDiv, error, title) {
@@ -253,14 +226,13 @@ class JSONToYAMLTool {
         const html = `
             <div class="result-error">
                 <div class="result-header">
-                    <span class="result-icon">❌</span>
                     <h3>${this.escapeHtml(title)}</h3>
                 </div>
                 <div class="error-message">
-                    <strong>Error:</strong> ${this.escapeHtml(detail)}
+                    ${this.escapeHtml(detail)}
                 </div>
                 <div class="error-suggestion">
-                    💡 <strong>Suggestion:</strong> Check for missing commas, unquoted keys, trailing commas, or mismatched brackets.
+                    Check for missing commas, unquoted keys, trailing commas, or mismatched brackets.
                 </div>
             </div>
         `;

@@ -108,7 +108,7 @@ function renderLintReport(report) {
         return { ok: true, text: html };
     }
 
-    let html = `❌ JSONL lint failed — ${report.errors.length} error${report.errors.length !== 1 ? 's' : ''}\n\n`;
+    let html = `JSONL lint failed — ${report.errors.length} error${report.errors.length !== 1 ? 's' : ''}\n\n`;
     report.errors.forEach((err, i) => {
         html += `${i + 1}. ${err.line != null ? `Line ${err.line}: ` : ''}${err.message}\n`;
     });
@@ -136,20 +136,19 @@ function escapeHtml(text) {
 }
 
 function showInfo(resultDiv, message) {
-    resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 1rem;">${escapeHtml('💡 ' + message)}</pre>`;
+    resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 0.75rem; font-size: 13px;">${escapeHtml(message)}</pre>`;
 }
 
 function showError(resultDiv, title, detail, suggestion) {
     const html = `
         <div class="result-error">
             <div class="result-header">
-                <span class="result-icon">❌</span>
                 <h3>${escapeHtml(title)}</h3>
             </div>
             <div class="error-message">
-                <strong>Error:</strong> ${escapeHtml(detail)}
+                ${escapeHtml(detail)}
             </div>
-            ${suggestion ? `<div class="error-suggestion">💡 <strong>Suggestion:</strong> ${escapeHtml(suggestion)}</div>` : ''}
+            ${suggestion ? `<div class="error-suggestion">${escapeHtml(suggestion)}</div>` : ''}
         </div>
     `;
     resultDiv.innerHTML = html;
@@ -159,7 +158,6 @@ function showConversionSuccess(resultDiv, title, output, statsHtml) {
     const html = `
         <div class="result-success">
             <div class="result-header">
-                <span class="result-icon">🔄</span>
                 <h3>${escapeHtml(title)}</h3>
             </div>
             ${statsHtml || ''}
@@ -177,22 +175,10 @@ function sizeStats(inputBytes, outputBytes, outputText) {
     const lines = outputText ? outputText.split('\n').length : 0;
     return `
         <div class="result-stats">
-            <div class="stat-item">
-                <span class="stat-label">Input size:</span>
-                <span class="stat-value">${inputBytes} bytes</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Output size:</span>
-                <span class="stat-value">${outputBytes} bytes</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Size change:</span>
-                <span class="stat-value">${diff > 0 ? '+' : ''}${diff}%</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Output lines:</span>
-                <span class="stat-value">${lines}</span>
-            </div>
+            <div class="stat-item"><span class="stat-label">Input</span><span class="stat-value">${inputBytes} B</span></div>
+            <div class="stat-item"><span class="stat-label">Output</span><span class="stat-value">${outputBytes} B</span></div>
+            <div class="stat-item"><span class="stat-label">Delta</span><span class="stat-value">${diff > 0 ? '+' : ''}${diff}%</span></div>
+            <div class="stat-item"><span class="stat-label">Lines</span><span class="stat-value">${lines}</span></div>
         </div>
     `;
 }

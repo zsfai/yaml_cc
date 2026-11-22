@@ -307,7 +307,7 @@ address:
         const resultDiv = document.getElementById('result-output');
         
         if (!input) {
-            this.showResult(resultDiv, '💡 Please enter some YAML content to validate.', 'info');
+            this.showResult(resultDiv, 'Enter YAML content to validate.', 'info');
             return;
         }
 
@@ -634,14 +634,14 @@ address:
 
 
     showValidationSuccess(resultDiv, result) {
-        let html = '✅ YAML Validation Successful\n\n';
+        let html = 'Valid\n\n';
         
         if (result.warnings.length > 0) {
             html += 'Warnings:\n';
             result.warnings.forEach((warning, index) => {
                 html += `${index + 1}. ${warning.line ? `Line ${warning.line}: ` : ''}${warning.message}`;
                 if (warning.suggestion) {
-                    html += ` (Suggestion: ${warning.suggestion})`;
+                    html += ` (${warning.suggestion})`;
                 }
                 html += '\n';
             });
@@ -649,14 +649,13 @@ address:
             html += 'No issues found.';
         }
         
-        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 1rem;">${this.escapeHtml(html)}</pre>`;
+        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 0.75rem; font-size: 13px;">${this.escapeHtml(html)}</pre>`;
     }
 
     showValidationErrors(resultDiv, result) {
-        let html = `❌ YAML Validation Failed\n`;
-        html += `Found ${result.errors.length} error${result.errors.length !== 1 ? 's' : ''}`;
+        let html = `Invalid — ${result.errors.length} error${result.errors.length !== 1 ? 's' : ''}`;
         if (result.warnings.length > 0) {
-            html += ` and ${result.warnings.length} warning${result.warnings.length !== 1 ? 's' : ''}`;
+            html += `, ${result.warnings.length} warning${result.warnings.length !== 1 ? 's' : ''}`;
         }
         html += '\n\n';
         
@@ -665,7 +664,7 @@ address:
             result.errors.forEach((error, index) => {
                 html += `${index + 1}. Line ${error.line || '?'}${error.column ? `, Column ${error.column}` : ''}: ${error.message}`;
                 if (error.suggestion) {
-                    html += ` (Fix: ${error.suggestion})`;
+                    html += ` (${error.suggestion})`;
                 }
                 html += '\n';
             });
@@ -677,13 +676,13 @@ address:
             result.warnings.forEach((warning, index) => {
                 html += `${index + 1}. ${warning.line ? `Line ${warning.line}${warning.column ? `, Column ${warning.column}` : ''}: ` : ''}${warning.message}`;
                 if (warning.suggestion) {
-                    html += ` (Suggestion: ${warning.suggestion})`;
+                    html += ` (${warning.suggestion})`;
                 }
                 html += '\n';
             });
         }
         
-        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 1rem;">${this.escapeHtml(html)}</pre>`;
+        resultDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; margin: 0; padding: 0.75rem; font-size: 13px;">${this.escapeHtml(html)}</pre>`;
     }
 
     formatErrorType(type) {
@@ -707,7 +706,7 @@ address:
         const resultDiv = document.getElementById('result-output');
         
         if (!input) {
-            this.showResult(resultDiv, '💡 Please enter some YAML content to format.', 'info');
+            this.showResult(resultDiv, 'Enter YAML content to format.', 'info');
             return;
         }
 
@@ -731,31 +730,17 @@ address:
                 : jsyaml.dump(docs[0], dumpOpts);
             const parsed = multi ? docs : docs[0];
             
-            // Show formatted result with statistics
             const stats = this.getYAMLStats(parsed);
             const html = `
                 <div class="result-success">
                     <div class="result-header">
-                        <span class="result-icon">⚡</span>
-                        <h3>YAML Formatted Successfully</h3>
+                        <h3>Formatted</h3>
                     </div>
                     <div class="result-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Top-level Keys:</span>
-                            <span class="stat-value">${stats.topLevelKeys}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Total Properties:</span>
-                            <span class="stat-value">${stats.totalProperties}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Nesting Depth:</span>
-                            <span class="stat-value">${stats.maxDepth}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Output Lines:</span>
-                            <span class="stat-value">${formatted.split('\n').length}</span>
-                        </div>
+                        <div class="stat-item"><span class="stat-label">Keys</span><span class="stat-value">${stats.topLevelKeys}</span></div>
+                        <div class="stat-item"><span class="stat-label">Properties</span><span class="stat-value">${stats.totalProperties}</span></div>
+                        <div class="stat-item"><span class="stat-label">Depth</span><span class="stat-value">${stats.maxDepth}</span></div>
+                        <div class="stat-item"><span class="stat-label">Lines</span><span class="stat-value">${formatted.split('\n').length}</span></div>
                     </div>
                     <div class="formatted-code">
                         <pre><code>${this.escapeHtml(formatted)}</code></pre>
@@ -764,28 +749,23 @@ address:
             `;
             resultDiv.innerHTML = html;
             
-            // Update editor with formatted YAML
             if (this.editor) {
                 this.editor.setValue(formatted, -1);
             }
             
-            // Add copy button
             this.addCopyButtonToResult(resultDiv, formatted);
-            
-            // Scroll to result
             resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } catch (error) {
             const html = `
                 <div class="result-error">
                     <div class="result-header">
-                        <span class="result-icon">❌</span>
-                        <h3>Cannot Format Invalid YAML</h3>
+                        <h3>Cannot format</h3>
                     </div>
                     <div class="error-message">
-                        <strong>Error:</strong> ${this.escapeHtml(error.message)}
+                        ${this.escapeHtml(error.message)}
                     </div>
                     <div class="error-suggestion">
-                        💡 <strong>Suggestion:</strong> Use the "Validate YAML" button to identify and fix syntax errors first, then try formatting again.
+                        Validate the YAML first, then try formatting again.
                     </div>
                 </div>
             `;
@@ -928,72 +908,50 @@ address:
         const resultDiv = document.getElementById('result-output');
         
         if (!input) {
-            this.showResult(resultDiv, '💡 Please enter some YAML content to convert to JSON.', 'info');
+            this.showResult(resultDiv, 'Enter YAML content to convert to JSON.', 'info');
             return;
         }
 
         try {
-            // Parse YAML and convert to JSON (array when multi-doc)
             const { docs, multi } = this.loadYamlDocuments(input);
             const parsed = multi ? docs : docs[0];
             const jsonString = JSON.stringify(parsed, null, 2);
             
-            // Get statistics
             const jsonSize = new Blob([jsonString]).size;
             const yamlSize = new Blob([input]).size;
-            const compressionRatio = ((1 - jsonSize / yamlSize) * 100).toFixed(1);
+            const sizeDiff = ((jsonSize / yamlSize - 1) * 100).toFixed(1);
             
             const html = `
                 <div class="result-success">
                     <div class="result-header">
-                        <span class="result-icon">🔄</span>
-                        <h3>Converted to JSON Successfully</h3>
+                        <h3>Converted to JSON</h3>
                     </div>
                     <div class="result-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">YAML Size:</span>
-                            <span class="stat-value">${yamlSize} bytes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">JSON Size:</span>
-                            <span class="stat-value">${jsonSize} bytes</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Size Difference:</span>
-                            <span class="stat-value">${compressionRatio > 0 ? '+' : ''}${compressionRatio}%</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">JSON Lines:</span>
-                            <span class="stat-value">${jsonString.split('\n').length}</span>
-                        </div>
+                        <div class="stat-item"><span class="stat-label">YAML</span><span class="stat-value">${yamlSize} B</span></div>
+                        <div class="stat-item"><span class="stat-label">JSON</span><span class="stat-value">${jsonSize} B</span></div>
+                        <div class="stat-item"><span class="stat-label">Delta</span><span class="stat-value">${sizeDiff > 0 ? '+' : ''}${sizeDiff}%</span></div>
+                        <div class="stat-item"><span class="stat-label">Lines</span><span class="stat-value">${jsonString.split('\n').length}</span></div>
                     </div>
                     <div class="formatted-code">
                         <pre><code>${this.escapeHtml(jsonString)}</code></pre>
-                    </div>
-                    <div class="conversion-tip">
-                        💡 <strong>Tip:</strong> JSON format is more verbose but universally supported in all programming languages.
                     </div>
                 </div>
             `;
             resultDiv.innerHTML = html;
             
-            // Add copy button
             this.addCopyButtonToResult(resultDiv, jsonString);
-            
-            // Scroll to result
             resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } catch (error) {
             const html = `
                 <div class="result-error">
                     <div class="result-header">
-                        <span class="result-icon">❌</span>
-                        <h3>Cannot Convert Invalid YAML</h3>
+                        <h3>Cannot convert</h3>
                     </div>
                     <div class="error-message">
-                        <strong>Error:</strong> ${this.escapeHtml(error.message)}
+                        ${this.escapeHtml(error.message)}
                     </div>
                     <div class="error-suggestion">
-                        💡 <strong>Suggestion:</strong> Use the "Validate YAML" button to identify and fix syntax errors first, then try conversion again.
+                        Validate the YAML first, then try conversion again.
                     </div>
                 </div>
             `;
@@ -1023,19 +981,19 @@ address:
                 // Highlight the validate button
                 this.highlightButton('validate-btn');
                 // Show a hint message
-                this.showResult(resultDiv, '💡 Click "Validate YAML" to check your YAML syntax and structure.', 'info');
+                this.showResult(resultDiv, 'Click Validate YAML to check syntax and structure.', 'info');
                 break;
             case 'format':
                 // Highlight the format button
                 this.highlightButton('format-btn');
                 // Show a hint message
-                this.showResult(resultDiv, '💡 Click "Format YAML" to beautify and format your YAML code.', 'info');
+                this.showResult(resultDiv, 'Click Format YAML to reindent the document.', 'info');
                 break;
             case 'convert':
                 // Highlight the convert button
                 this.highlightButton('convert-btn');
                 // Show a hint message
-                this.showResult(resultDiv, '💡 Click "Convert to JSON" to transform your YAML into JSON format.', 'info');
+                this.showResult(resultDiv, 'Click Convert to JSON to serialize as JSON.', 'info');
                 break;
         }
         
@@ -1136,68 +1094,43 @@ address:
     }
 
     setupExampleTabs() {
-        // Setup example tabs functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabPanels = document.querySelectorAll('.tab-panel');
+        const tabButtons = document.querySelectorAll('.example-tab');
+        const tabPanels = document.querySelectorAll('.example-panel');
+        if (tabButtons.length === 0) return;
 
-        if (tabButtons.length === 0) return; // No tabs found
+        const activate = (button) => {
+            const targetId = button.getAttribute('data-example');
+            const targetPanel = document.getElementById(targetId);
+            if (!targetPanel) return;
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetTab = button.getAttribute('data-tab');
-                const targetPanel = document.getElementById(targetTab);
-                
-                if (!targetPanel) return;
-                
-                // Remove active styling from all buttons
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('border-blue-600', 'text-gray-900');
-                    btn.classList.add('border-transparent', 'text-gray-700');
-                });
-                
-                // Hide all panels
-                tabPanels.forEach(panel => {
-                    panel.classList.add('hidden');
-                    panel.classList.remove('active');
-                    panel.style.display = 'none';
-                });
-                
-                // Add active styling to clicked button
-                button.classList.remove('border-transparent', 'text-gray-700');
-                button.classList.add('border-blue-600', 'text-gray-900', 'active');
-                
-                // Show target panel
-                targetPanel.classList.remove('hidden');
-                targetPanel.classList.add('active');
-                targetPanel.style.display = 'block';
+            tabButtons.forEach((btn) => {
+                const on = btn === button;
+                btn.classList.toggle('is-active', on);
+                btn.classList.toggle('border-blue-600', on);
+                btn.classList.toggle('text-gray-900', on);
+                btn.classList.toggle('border-transparent', !on);
+                btn.classList.toggle('text-gray-600', !on);
+                btn.setAttribute('aria-selected', on ? 'true' : 'false');
             });
+
+            tabPanels.forEach((panel) => {
+                panel.classList.toggle('is-active', panel === targetPanel);
+            });
+        };
+
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', () => activate(button));
         });
 
-        // Set initial active state
-        if (tabButtons.length > 0 && tabPanels.length > 0) {
-            const firstButton = tabButtons[0];
-            const firstPanel = document.getElementById(firstButton.getAttribute('data-tab'));
-            if (firstPanel) {
-                tabPanels.forEach(panel => {
-                    panel.classList.add('hidden');
-                    panel.classList.remove('active');
-                    panel.style.display = 'none';
-                });
-                firstButton.classList.remove('border-transparent', 'text-gray-700');
-                firstButton.classList.add('border-blue-600', 'text-gray-900', 'active');
-                firstPanel.classList.remove('hidden');
-                firstPanel.classList.add('active');
-                firstPanel.style.display = 'block';
-            }
-        }
+        const initial = document.querySelector('.example-tab.is-active') || tabButtons[0];
+        if (initial) activate(initial);
 
-        // Add copy functionality to example code blocks
         this.addExampleCopyButtons();
     }
 
     addExampleCopyButtons() {
         // Add copy buttons to example code blocks
-        const codeBlocks = document.querySelectorAll('.tab-panel pre code');
+        const codeBlocks = document.querySelectorAll('.example-panel pre code');
         
         codeBlocks.forEach(codeBlock => {
             const wrapper = codeBlock.closest('.bg-gray-900');
@@ -1437,7 +1370,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Show ready message
             const resultDiv = document.getElementById('result-output');
             if (resultDiv) {
-                resultDiv.innerHTML = '✅ YAML Tools ready! Enter your YAML content above and click "Validate YAML" to check for errors.';
+                resultDiv.innerHTML = 'Ready. Enter YAML above, then Validate, Format, or Convert.';
                 resultDiv.className = 'result-box success';
             }
         } else {
@@ -1450,7 +1383,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Show error message to user
         const resultDiv = document.getElementById('result-output');
         if (resultDiv) {
-            resultDiv.innerHTML = `❌ Failed to initialize YAML tools. 
+            resultDiv.innerHTML = `Failed to initialize YAML tools. 
             <br><br><strong>Error:</strong> ${error.message}
             <br><br><strong>Troubleshooting:</strong>
             <ul style="text-align: left; margin: 1rem 0;">
